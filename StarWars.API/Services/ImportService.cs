@@ -25,9 +25,7 @@ namespace StarWars.API.Services
             // Todo: Implementar os demais endpoints
 
             var starships = await ImportStarshipsAsync(cancellationToken);
-
             var response = starships;
-
 
             return response;
         }
@@ -100,10 +98,10 @@ namespace StarWars.API.Services
 
                     if (existCharacter is null)
                     {
-                        var _movie = await _starWarsRepository.CreateCharacterAsync(
+                        var _character = await _starWarsRepository.CreateCharacterAsync(
                                               model, cancellationToken);
 
-                        if (_movie is null)
+                        if (_character is null)
                         {
                             i++;
                             _errors.Add(i);
