@@ -1,4 +1,4 @@
-
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using StarWars.API.Models;
 using StarWars.API.Storages.Datas.EntityConfigurations;
@@ -22,7 +22,6 @@ namespace StarWars.API.Storages.Datas
        //  public DbSet<VehicleModel> Vehicles { get; private set; }
         #endregion
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var mySqlConnection = _configuration.GetConnectionString("DefaultConnection");
@@ -39,12 +38,11 @@ namespace StarWars.API.Storages.Datas
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.ApplyConfiguration(new MovieConfiguration());
-
+            // Todo: retirar o comentario após garantir a existencia e configuração da tabela com a entidade
             modelBuilder.ApplyConfiguration(new CharacterConfiguration());
-
             modelBuilder.ApplyConfiguration(new PlanetConfiguration());
+            //modelBuilder.ApplyConfiguration(new VehicleConfiguration());
 
             modelBuilder.ApplyConfiguration(new  StarshipConfiguration());
 
