@@ -27,6 +27,22 @@ namespace StarWars.API.Endpoints
              .Produces(StatusCodes.Status200OK)
              .Produces(StatusCodes.Status404NotFound);
 
+            route.MapGet($"{routePrefix}/getcharacters", async (
+          [FromServices] IStarWarsService starWarsService,
+           CancellationToken cancellationToken) =>
+            {
+                var characters = await starWarsService.GetCharactersAsync(cancellationToken);
+
+                if (characters is null)
+                {
+                    return Results.NotFound();
+                }
+
+                return Results.Ok(characters);
+            }).WithName($"GetCharactersAsync{routePrefix}")
+        .Produces(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status404NotFound);
+
             return route;
         }
     }

@@ -18,6 +18,7 @@ namespace StarWars.API.Storages.Datas
         public DbSet<MovieModel> Movies { get; private set; }
         public DbSet<CharacterModel> Characters { get; private set; }
         public DbSet<PlanetModel> Planet { get; private set; }
+        public DbSet<StarshipModel> Spaceships { get; private set; }
        //  public DbSet<VehicleModel> Vehicles { get; private set; }
         #endregion
 
@@ -45,12 +46,12 @@ namespace StarWars.API.Storages.Datas
 
             modelBuilder.ApplyConfiguration(new PlanetConfiguration());
 
+            modelBuilder.ApplyConfiguration(new  StarshipConfiguration());
+
             modelBuilder.UsePropertyAccessMode(PropertyAccessMode.Property);
 
             base.OnModelCreating(modelBuilder);
         }
-
-
     }
 }
 
