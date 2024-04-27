@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using StarWars.API.Models;
 using StarWars.API.Storages.Datas;
@@ -50,15 +50,6 @@ namespace StarWars.API.Storages.Repositores
         }
 
         public async Task<CharacterModel?> GetCharacterByIdAsync(
-            int characterId, CancellationToken cancellationToken = default)
-        {
-            var response = await _context.Characters.Where(x=> x.CharacterId == characterId)
-                .FirstOrDefaultAsync(cancellationToken);
-
-            return response;
-        }
-
-        public async Task<CharacterModel?> GetCharacterByIdAsync(
             int characterId, 
             CancellationToken cancellationToken = default)
         {
@@ -92,6 +83,27 @@ namespace StarWars.API.Storages.Repositores
         public async Task<PlanetModel?> CreatePlanetAsync(PlanetModel model, CancellationToken cancellationToken = default)
         {
             _context.Planet.Add(model);
+
+            var result = await _context.SaveChangesAsync(cancellationToken);
+
+            return result == 0 ? null : model;
+        }
+
+        public async Task<StarshipModel?> GetStarshipByIdAsync(
+           int starshipId,
+           CancellationToken cancellationToken = default)
+        {
+            var response = await _context.Spaceships.Where(x => x.StarshipId == starshipId)
+                 .FirstOrDefaultAsync(cancellationToken);
+
+            await Task.Delay(0);
+
+            return null;
+        }
+
+        public async Task<StarshipModel?> CreateStarshipAsync(StarshipModel model, CancellationToken cancellationToken = default)
+        {
+            _context.Spaceships.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
 

@@ -23,14 +23,11 @@ namespace StarWars.API.Services
             CancellationToken cancellationToken = default)
         {
             // Todo: Implementar os demais endpoints
-
-            var planets = await ImportPlanetsAsync(cancellationToken);
-
+            var starships = await ImportStarshipsAsync(cancellationToken);
             var characters = await ImportCharactersAsync(cancellationToken);
-            
             var movies = await ImportMoviesAsync(cancellationToken);
 
-            return characters = movies;
+            return characters = movies = starships;
         }
 
         private async Task<bool> ImportMoviesAsync(
@@ -147,6 +144,48 @@ namespace StarWars.API.Services
                                               model, cancellationToken);
 
                         if (_planet is null)
+                        {
+                            i++;
+                            _errors.Add(i);
+                        }
+                    }
+                }
+            }
+
+            var _response = (_errors?.Count ?? 0) == 0;
+
+            return _response;
+        }
+
+        private async Task<bool> ImportStarshipsAsync(
+            CancellationToken cancellationToken)
+        {
+            string starshipsUrl = "https://swapi.py4e.com/api/starships";
+
+            var response = await _httpClient.GetFromJsonAsync<StarshipImport>(
+                starshipsUrl, cancellationToken: cancellationToken);
+
+            var _errors = new List<int>();
+
+            if (response?.Results.Count > 0)
+            {
+                int i = 0;
+
+                foreach (var starship in response.Results)
+                {
+                    var model = starship.ConvertToModel();
+
+                    var existStarship = await _starWarsRepository
+                        .GetStarshipByIdAsync(
+                        model.StarshipId,
+                        cancellationToken);
+
+                    if (existStarship is null)
+                    {
+                        var _starship = await _starWarsRepository.CreateStarshipAsync(
+                                              model, cancellationToken);
+
+                        if (_starship is null)
                         {
                             i++;
                             _errors.Add(i);
