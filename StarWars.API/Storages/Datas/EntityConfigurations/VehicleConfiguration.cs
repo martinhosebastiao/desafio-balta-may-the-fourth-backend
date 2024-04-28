@@ -9,24 +9,42 @@ public class VehicleConfiguration : IEntityTypeConfiguration<VehicleModel>
     public void Configure(EntityTypeBuilder<VehicleModel> builder)
     {
         builder.ToTable("vehicles");
+
         builder.HasKey(v => v.VehicleId);
-        builder.Property(v => v.VehicleId).ValueGeneratedOnAdd();
+        builder.Property(v => v.VehicleId)
+            .HasColumnName("id");
 
         builder.Property(v => v.Name)
-            .HasMaxLength(100);
+            .HasColumnName("name");
+
         builder.Property(v => v.Model)
-            .HasMaxLength(100);
+            .HasColumnName("model");
+
         builder.Property(v => v.Manufacturer)
-            .HasMaxLength(100);
+            .HasColumnName("manufacturer");
+
         builder.Property(v => v.Length)
-            .HasMaxLength(100);
-        builder.Property(v => v.MaxSpeed)
-            .HasMaxLength(100);
-        builder.Property(v => v.CargoCapacity)
-            .HasMaxLength(100);
+            .HasColumnName("length");
+
+        builder.Property(v => v.Crew)
+            .HasColumnName("crew");
+
+        builder.Property(v => v.Passengers)
+            .HasColumnName("passengers ");
+
         builder.Property(v => v.Consumables)
-            .HasMaxLength(100);
+           .HasColumnName("consumables");
+
+        builder.Property(v => v.CostInCredits)
+           .HasColumnName("cost_in_credits");
+
+        builder.Property(v => v.CargoCapacity)
+           .HasColumnName("cargo_capacity");
+
+        builder.Property(v => v.MaxSpeed)
+            .HasColumnName("max_atmosphering_speed");
+
         builder.Property(v => v.Class)
-            .HasMaxLength(100);
+            .HasColumnName("vehicle_class");
     }
 }

@@ -14,5 +14,5 @@ public class VehicleModel
     public string CargoCapacity { get; set; }
     public string Consumables { get; set; }
     public string Class { get; set; }
-    public List<MovieModel> Movies { get; set; }
+    // public List<MovieModel> Movies { get; set; }
 }
