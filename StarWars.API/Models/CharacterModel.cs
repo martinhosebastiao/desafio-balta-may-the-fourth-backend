@@ -8,7 +8,6 @@ public sealed class CharacterModel
     public int CharacterId { get; set; }
     public string Name { get; set; }
     public string Height { get; set; }
-    public string Weight { get; set; }
     public string Mass { get;  set; }
     public string HairColor { get; set; }
     public string SkinColor { get; set; }
@@ -17,6 +16,5 @@ public sealed class CharacterModel
     public string Gender { get; set; }
     public DateTime Edited { get; set; }
     public DateTime Created { get; set; }
-    // public PlanetModel Planet { get; set; }
-    // public List<MovieModel> Movies { get; set; }
+    public List<PlanetModel> Planet { get; set; }
 }

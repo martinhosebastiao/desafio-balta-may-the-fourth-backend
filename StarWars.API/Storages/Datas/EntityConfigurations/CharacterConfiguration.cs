@@ -16,7 +16,6 @@ public class CharacterConfiguration : IEntityTypeConfiguration<CharacterModel>
 
         builder.Property(x => x.Name).IsRequired().HasMaxLength(100); 
         builder.Property(x => x.Height).HasMaxLength(20); 
-        builder.Property(x => x.Weight).HasMaxLength(20); 
 
         builder.Property(x => x.HairColor).HasMaxLength(50);
         builder.Property(x => x.HairColor).HasColumnName("hair_color"); 

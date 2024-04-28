@@ -18,8 +18,8 @@ namespace StarWars.API.Storages.Datas
         public DbSet<MovieModel> Movies { get; private set; }
         public DbSet<CharacterModel> Characters { get; private set; }
         public DbSet<PlanetModel> Planet { get; private set; }
-        public DbSet<StarshipModel> Spaceships { get; private set; }
-       //  public DbSet<VehicleModel> Vehicles { get; private set; }
+        public DbSet<StarshipModel> Starships { get; private set; }
+        public DbSet<VehicleModel> Vehicles { get; private set; }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -42,7 +42,7 @@ namespace StarWars.API.Storages.Datas
             // Todo: retirar o comentario após garantir a existencia e configuração da tabela com a entidade
             modelBuilder.ApplyConfiguration(new CharacterConfiguration());
             modelBuilder.ApplyConfiguration(new PlanetConfiguration());
-            //modelBuilder.ApplyConfiguration(new VehicleConfiguration());
+            modelBuilder.ApplyConfiguration(new VehicleConfiguration());
 
             modelBuilder.ApplyConfiguration(new  StarshipConfiguration());
 

@@ -36,7 +36,7 @@ namespace StarWars.API.Storages.Repositores
         public async Task<MovieModel?> GetMovieByIdAsync(
             int movieId, CancellationToken cancellationToken = default)
         {
-            var response = await _context.Movies.Where(x=> x.MovieId == movieId)
+            var response = await _context.Movies.Where(x => x.MovieId == movieId)
                 .FirstOrDefaultAsync(cancellationToken);
 
             return response;
@@ -50,11 +50,11 @@ namespace StarWars.API.Storages.Repositores
         }
 
         public async Task<CharacterModel?> GetCharacterByIdAsync(
-            int characterId, 
+            int characterId,
             CancellationToken cancellationToken = default)
         {
-           var response = await _context.Characters.Where(x => x.CharacterId == characterId)
-                .FirstOrDefaultAsync(cancellationToken);
+            var response = await _context.Characters.Where(x => x.CharacterId == characterId)
+                 .FirstOrDefaultAsync(cancellationToken);
 
             return response;
         }
@@ -93,7 +93,7 @@ namespace StarWars.API.Storages.Repositores
            int starshipId,
            CancellationToken cancellationToken = default)
         {
-            var response = await _context.Spaceships.Where(x => x.StarshipId == starshipId)
+            var response = await _context.Starships.Where(x => x.StarshipId == starshipId)
                  .FirstOrDefaultAsync(cancellationToken);
 
             await Task.Delay(0);
@@ -103,12 +103,28 @@ namespace StarWars.API.Storages.Repositores
 
         public async Task<StarshipModel?> CreateStarshipAsync(StarshipModel model, CancellationToken cancellationToken = default)
         {
-            _context.Spaceships.Add(model);
+            _context.Starships.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
 
             return result == 0 ? null : model;
         }
+
+        // public async Task<List<StarshipModel>?> GetStarshipsAsync(CancellationToken cancellationToken = default)
+        // {
+        //     var response = await _context.Starships.ToListAsync(cancellationToken);
+
+        //     return response;
+        // }
+
+        public async Task<List<StarshipModel>?> GetStarshipsAsync(
+            CancellationToken cancellationToken = default)
+        {
+            var response = await _context.Starships.ToListAsync(cancellationToken);
+            return response;
+        }
     }
+
+    
 }
 
