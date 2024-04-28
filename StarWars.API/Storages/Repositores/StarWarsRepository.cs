@@ -97,6 +97,28 @@ namespace StarWars.API.Storages.Repositores
 
             return response;
         }
+        
+        public async Task<VehicleModel?> GetVehicleByIdAsync(
+            int Id,
+            CancellationToken cancellationToken = default)
+        {
+            var response = await _context.Vehicles.Where(x => x.Id == Id)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            await Task.Delay(0);
+
+            return null;
+        }
+
+        public async Task<VehicleModel?> CreateVehicleAsync(VehicleModel model, CancellationToken cancellationToken = default)
+        {
+            _context.Vehicles.Add(model);
+
+            var result = await _context.SaveChangesAsync(cancellationToken);
+
+            return result == 0 ? null : model;
+        }
+
     }
 }
 

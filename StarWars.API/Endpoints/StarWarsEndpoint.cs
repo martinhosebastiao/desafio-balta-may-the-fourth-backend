@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using StarWars.API.Services;
 
 namespace StarWars.API.Endpoints
@@ -62,6 +60,7 @@ namespace StarWars.API.Endpoints
                 .WithName($"GetVehiclesAsync{routePrefix}")
                 .Produces(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status404NotFound);
+
             return route;
             
             
