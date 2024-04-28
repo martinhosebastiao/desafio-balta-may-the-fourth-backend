@@ -47,7 +47,10 @@ namespace StarWars.API.Storages.Repositores
 			PlanetModel model,
 			CancellationToken cancellationToken = default);
 
-		Task<StarshipModel?> GetStarshipByIdAsync(
+        Task<List<PlanetModel?>> GetPlanetsAsync(
+            CancellationToken cancellationToken = default);
+
+        Task<StarshipModel?> GetStarshipByIdAsync(
 		   int starshipId,
 		   CancellationToken cancellationToken = default);
 

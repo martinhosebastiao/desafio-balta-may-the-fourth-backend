@@ -39,6 +39,20 @@ namespace StarWars.API.Services
 
             return characters;
         }
+
+        public async Task<PlanetModel?> GetPlanetByIdAsync(int planetId, CancellationToken cancellationToken)
+        {
+            var planet = await _starWarsRepository.GetPlanetByIdAsync(planetId, cancellationToken);
+
+            return planet;
+        }
+
+        public async Task<List<PlanetModel>?> GetPlanetsAsync(CancellationToken cancellationToken)
+        {
+            var characters = await _starWarsRepository.GetPlanetsAsync(cancellationToken);
+
+            return characters;
+        }
     }
 }
 

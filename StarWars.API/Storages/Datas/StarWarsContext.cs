@@ -17,7 +17,7 @@ namespace StarWars.API.Storages.Datas
         #region - Configuração de DbSets -
         public DbSet<MovieModel> Movies { get; private set; }
         public DbSet<CharacterModel> Characters { get; private set; }
-        public DbSet<PlanetModel> Planet { get; private set; }
+        public DbSet<PlanetModel> Planets { get; private set; }
         public DbSet<StarshipModel> Spaceships { get; private set; }
         public DbSet<VehicleModel> Vehicles { get; private set; }
         #endregion
@@ -41,7 +41,7 @@ namespace StarWars.API.Storages.Datas
             modelBuilder.ApplyConfiguration(new MovieConfiguration());
             modelBuilder.ApplyConfiguration(new CharacterConfiguration());
             modelBuilder.ApplyConfiguration(new PlanetConfiguration());
-            modelBuilder.ApplyConfiguration(new  StarshipConfiguration());
+            modelBuilder.ApplyConfiguration(new StarshipConfiguration());
             modelBuilder.ApplyConfiguration(new VehicleConfiguration());
 
 
