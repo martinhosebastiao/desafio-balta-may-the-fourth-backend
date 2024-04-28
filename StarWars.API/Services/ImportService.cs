@@ -23,8 +23,8 @@ namespace StarWars.API.Services
             CancellationToken cancellationToken = default)
         {
             // Todo: Implementar os demais endpoints
-
             var starships = await ImportStarshipsAsync(cancellationToken);
+
             var response = starships;
 
             return response;

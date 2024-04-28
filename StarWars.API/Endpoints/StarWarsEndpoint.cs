@@ -28,6 +28,7 @@ namespace StarWars.API.Endpoints
              .Produces(StatusCodes.Status404NotFound);
 
             route.MapGet($"{routePrefix}/getcharacters", async (
+
               [FromServices] IStarWarsService starWarsService,
                CancellationToken cancellationToken) =>
                 {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using StarWars.API.Models;
 using StarWars.API.Storages.Datas;

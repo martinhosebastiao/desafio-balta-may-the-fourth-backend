@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using StarWars.API.Models;
 
 namespace StarWars.API.Services
@@ -10,5 +10,6 @@ namespace StarWars.API.Services
 		Task<List<CharacterModel>?> GetCharactersAsync(CancellationToken cancellationToken);
 		Task<CharacterModel?> GetCharacterByIdAsync(int characterId, CancellationToken cancellationToken);
     }
+
 }
 
