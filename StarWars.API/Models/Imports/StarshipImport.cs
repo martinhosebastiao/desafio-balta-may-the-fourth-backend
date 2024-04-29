@@ -35,6 +35,7 @@ public class StarshipResult
             Length = Length,
             MaxAtmospheringSpeed = Max_Atmosphering_Speed,
             Crew = Crew,
+            Passengers = Passengers,
             CargoCapacity = Cargo_Capacity,
             Consumables = Consumables,
             HyperdriveRating = Hyperdrive_Rating,
