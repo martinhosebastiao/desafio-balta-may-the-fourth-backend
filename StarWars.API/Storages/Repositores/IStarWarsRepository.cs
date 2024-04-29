@@ -48,6 +48,12 @@ namespace StarWars.API.Storages.Repositores
 			CancellationToken cancellationToken = default);
 		
 		Task<List<VehicleModel>?> GetVehicleAsync(
+
+		Task<StarshipModel?> GetStarshipByIdAsync(
+		   int starshipId,
+		   CancellationToken cancellationToken = default);
+
+		Task<StarshipModel?> CreateStarshipAsync(
 			CancellationToken cancellationToken = default);
     }
 }
