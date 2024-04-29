@@ -88,6 +88,13 @@ namespace StarWars.API.Storages.Repositores
 
             return result == 0 ? null : model;
         }
+     
+        public async Task<List<VehicleModel>?> GetVehicleAsync(
+            CancellationToken cancellationToken = default)
+        {
+            var response = await _context.Vehicles.ToListAsync(cancellationToken);
+
+            return response;
 
         public async Task<StarshipModel?> GetStarshipByIdAsync(
            int starshipId,

@@ -38,6 +38,12 @@ namespace StarWars.API.Services
 
             return character;
         }
+        
+        public async Task<List<VehicleModel>?> GetVehicleAsync(CancellationToken cancellationToken)
+        {
+            var vehicle = await _starWarsRepository.GetVehicleAsync(cancellationToken);
+            return vehicle;
+        }
     }
 }
 
