@@ -29,7 +29,9 @@ public class StarshipConfiguration : IEntityTypeConfiguration<StarshipModel>
 
         builder.Property(x => x.Crew).HasColumnName("crew");
 
-        // builder.Property(x => x.Passengers).HasColumnName("passengers");
+        builder.Property(x => x.Passengers).HasColumnName("passengers");
+        
+        builder.Property(x => x.Passengers).HasDefaultValue(string.Empty);
 
         builder.Property(x => x.CargoCapacity).HasColumnName("cargo_capacity");
 

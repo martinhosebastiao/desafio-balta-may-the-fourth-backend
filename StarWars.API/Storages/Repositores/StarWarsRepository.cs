@@ -106,8 +106,16 @@ namespace StarWars.API.Storages.Repositores
             _context.Starships.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
-
-            return result == 0 ? null : model;
+            if (result == 0)
+            {
+                return null;
+            }
+            else
+            {
+                // Verifica se o campo Passengers é nulo e, se for, atribui uma string vazia
+                model.Passengers = model.Passengers ?? string.Empty;
+                return model;
+            }
         }
 
         // public async Task<List<StarshipModel>?> GetStarshipsAsync(CancellationToken cancellationToken = default)
@@ -125,6 +133,6 @@ namespace StarWars.API.Storages.Repositores
         }
     }
 
-    
+
 }
 
