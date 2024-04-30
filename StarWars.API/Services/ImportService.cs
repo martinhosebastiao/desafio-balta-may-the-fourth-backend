@@ -26,9 +26,6 @@ namespace StarWars.API.Services
             // var planets = await ImportPlanetsAsync(cancellationToken);
             var vehicles = await ImportVehiclesAsync(cancellationToken);
             var starships = await ImportStarshipsAsync(cancellationToken);
-            var characters = await ImportCharactersAsync(cancellationToken);
-            var movies = await ImportMoviesAsync(cancellationToken);
-
             return characters = movies = starships = vehicles;
         }
 

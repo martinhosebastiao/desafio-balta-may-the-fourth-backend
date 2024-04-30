@@ -46,6 +46,7 @@ namespace StarWars.API.Storages.Repositores
             CancellationToken cancellationToken = default)
         {
             var response = await _context.Characters.ToListAsync(cancellationToken);
+
             return response;
         }
 
@@ -72,7 +73,7 @@ namespace StarWars.API.Storages.Repositores
             int planetId,
             CancellationToken cancellationToken = default)
         {
-            var response = await _context.Planet.Where(x => x.PlanetId == planetId)
+            var response = await _context.Planets.Where(x => x.PlanetId == planetId)
                  .FirstOrDefaultAsync(cancellationToken);
 
             await Task.Delay(0);
@@ -82,7 +83,7 @@ namespace StarWars.API.Storages.Repositores
 
         public async Task<PlanetModel?> CreatePlanetAsync(PlanetModel model, CancellationToken cancellationToken = default)
         {
-            _context.Planet.Add(model);
+            _context.Planets.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
 
@@ -95,6 +96,13 @@ namespace StarWars.API.Storages.Repositores
             var response = await _context.Vehicles.ToListAsync(cancellationToken);
 
             return response;
+
+        public async Task<List<PlanetModel>?> GetPlanetsAsync(CancellationToken cancellationToken = default)
+        {
+            var response = await _context.Planets.ToListAsync(cancellationToken);
+
+            return response;
+        }
 
         public async Task<StarshipModel?> GetStarshipByIdAsync(
            int starshipId,

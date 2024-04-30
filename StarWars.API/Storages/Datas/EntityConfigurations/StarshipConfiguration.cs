@@ -8,7 +8,7 @@ public class StarshipConfiguration : IEntityTypeConfiguration<StarshipModel>
 {
     public void Configure(EntityTypeBuilder<StarshipModel> builder)
     {
-        builder.ToTable("spaceships");
+        builder.ToTable("starships");
 
         builder.HasKey(x => x.StarshipId);
         builder.Property(x => x.StarshipId)
@@ -24,7 +24,7 @@ public class StarshipConfiguration : IEntityTypeConfiguration<StarshipModel>
             .HasColumnName("manufacturer");
 
         builder.Property(x => x.CostInCredits)
-            .HasColumnName("costInCredits");
+            .HasColumnName("cost_in_credits");
 
         builder.Property(x => x.Length)
             .HasColumnName("length");
@@ -42,21 +42,21 @@ public class StarshipConfiguration : IEntityTypeConfiguration<StarshipModel>
             .HasColumnName("passengers");
 
         builder.Property(x => x.CargoCapacity)
-            .HasColumnName("cargoCapacity");
+            .HasColumnName("cargo_capacity");
 
         builder.Property(x => x.HyperdriveRating)
-            .HasColumnName("hyperdriveRating");
+            .HasColumnName("hyperdrive_rating");
 
         builder.Property(x => x.MaxAtmospheringSpeed)
-            .HasColumnName("maxSpeed");
+            .HasColumnName("max_atmosphering_speed");
 
         builder.Property(x => x.MGLT)
-            .HasColumnName("mglt");
+            .HasColumnName("MGLT");
 
         builder.Property(x => x.Consumables)
             .HasColumnName("consumables");
 
         builder.Property(x => x.StarshipClass)
-            .HasColumnName("class");
+            .HasColumnName("starship_class");
     }
 }

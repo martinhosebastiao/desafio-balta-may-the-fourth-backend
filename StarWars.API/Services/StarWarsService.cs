@@ -26,17 +26,32 @@ namespace StarWars.API.Services
             return movies;
         }
 
-
-        public async Task<List<CharacterModel>?> GetCharacterAsync(CancellationToken cancellationToken)
-        {
-            var character = await _starWarsRepository.GetCharactersAsync(cancellationToken);
-            return character;
-        }
         public async Task<CharacterModel?> GetCharacterByIdAsync(int characterId, CancellationToken cancellationToken)
         {
             var character = await _starWarsRepository.GetCharacterByIdAsync(characterId, cancellationToken);
 
             return character;
+        }
+
+        public async Task<List<CharacterModel>?> GetCharactersAsync(CancellationToken cancellationToken)
+        {
+            var characters = await _starWarsRepository.GetCharactersAsync(cancellationToken);
+
+            return characters;
+        }
+
+        public async Task<PlanetModel?> GetPlanetByIdAsync(int planetId, CancellationToken cancellationToken)
+        {
+            var planet = await _starWarsRepository.GetPlanetByIdAsync(planetId, cancellationToken);
+
+            return planet;
+        }
+
+        public async Task<List<PlanetModel>?> GetPlanetsAsync(CancellationToken cancellationToken)
+        {
+            var characters = await _starWarsRepository.GetPlanetsAsync(cancellationToken);
+
+            return characters;
         }
         
         public async Task<List<VehicleModel>?> GetVehicleAsync(CancellationToken cancellationToken)
