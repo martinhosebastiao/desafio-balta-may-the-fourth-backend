@@ -16,6 +16,6 @@ public class PlanetModel
     public string Terrain { get; set; }
     public string SurfaceWater { get; set; }
     public string Population { get; set; }
-    // public List<CharacterModel> characters { get; set; }
-    // public List<MovieModel> movies { get; set; }
+    public List<CharacterModel> Characters { get; set; }
+    public List<MovieModel> Movies { get; set; }
 }

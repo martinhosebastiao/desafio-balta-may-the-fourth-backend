@@ -17,8 +17,8 @@ public class PlanetResult
     public string Terrain { get; set; }
     public string Surface_Water { get; set; }
     public string Population { get; set; }
-    public List<string> Characters { get; set; }
-    public List<string> Movies { get; set; }
+    public List<CharacterModel> Residents { get; set; }
+    public List<MovieModel> Films { get; set; }
 
     public PlanetModel ConvertToModel()
     {
@@ -32,7 +32,9 @@ public class PlanetResult
             Gravity = Gravity,
             Terrain = Terrain,
             SurfaceWater = Surface_Water,
-            Population = Population
+            Population = Population,
+            Characters = Residents,
+            Movies = Films
         };
     }
 }
