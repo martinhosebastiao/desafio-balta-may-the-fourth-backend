@@ -6,6 +6,7 @@ public class PlanetModel
     {
     }
 
+<<<<<<< HEAD
     public int PlanetId { get; set; }
     public string Name { get; set; }
     public string RotationPeriod { get; set; }

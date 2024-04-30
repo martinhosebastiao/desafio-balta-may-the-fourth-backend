@@ -89,6 +89,13 @@ namespace StarWars.API.Storages.Repositores
 
             return result == 0 ? null : model;
         }
+     
+        public async Task<List<VehicleModel>?> GetVehicleAsync(
+            CancellationToken cancellationToken = default)
+        {
+            var response = await _context.Vehicles.ToListAsync(cancellationToken);
+
+            return response;
 
         public async Task<List<PlanetModel>?> GetPlanetsAsync(CancellationToken cancellationToken = default)
         {
@@ -112,6 +119,27 @@ namespace StarWars.API.Storages.Repositores
         public async Task<StarshipModel?> CreateStarshipAsync(StarshipModel model, CancellationToken cancellationToken = default)
         {
             _context.Spaceships.Add(model);
+
+            var result = await _context.SaveChangesAsync(cancellationToken);
+
+            return result == 0 ? null : model;
+        }
+        
+        public async Task<VehicleModel?> GetVehicleByIdAsync(
+            int Id,
+            CancellationToken cancellationToken = default)
+        {
+            var response = await _context.Vehicles.Where(x => x.Id == Id)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            await Task.Delay(0);
+
+            return null;
+        }
+
+        public async Task<VehicleModel?> CreateVehicleAsync(VehicleModel model, CancellationToken cancellationToken = default)
+        {
+            _context.Vehicles.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
 
