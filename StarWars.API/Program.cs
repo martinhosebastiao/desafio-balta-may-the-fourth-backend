@@ -19,15 +19,12 @@ public class Program
 
         var app = builder.Build();
 
-        if (app.Environment.IsProduction())
+        //Força o uso de https 
+        app.Use((context, next) =>
         {
-            //Força o uso de https 
-            app.Use((context, next) =>
-            {
-                context.Request.Scheme = "https";
-                return next();
-            });
-        }
+            context.Request.Scheme = "https";
+            return next();
+        });
 
         app.UseEndpoints();
         app.UseMiddlewares();

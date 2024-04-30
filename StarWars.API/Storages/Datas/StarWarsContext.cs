@@ -1,4 +1,3 @@
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using StarWars.API.Models;
 using StarWars.API.Storages.Datas.EntityConfigurations;
@@ -18,8 +17,9 @@ namespace StarWars.API.Storages.Datas
         public DbSet<MovieModel> Movies { get; private set; }
         public DbSet<CharacterModel> Characters { get; private set; }
         public DbSet<PlanetModel> Planets { get; private set; }
-        public DbSet<StarshipModel> Spaceships { get; private set; }
+        public DbSet<StarshipModel> Starships { get; private set; }
         public DbSet<VehicleModel> Vehicles { get; private set; }
+        public DbSet<MovieRelationshipModel> MovieRelationships { get; private set; }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -43,6 +43,7 @@ namespace StarWars.API.Storages.Datas
             modelBuilder.ApplyConfiguration(new PlanetConfiguration());
             modelBuilder.ApplyConfiguration(new StarshipConfiguration());
             modelBuilder.ApplyConfiguration(new VehicleConfiguration());
+            modelBuilder.ApplyConfiguration(new MovieRelationshipConfiguration());
 
 
             modelBuilder.UsePropertyAccessMode(PropertyAccessMode.Property);

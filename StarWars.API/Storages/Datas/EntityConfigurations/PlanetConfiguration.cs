@@ -9,8 +9,8 @@ public class PlanetConfiguration : IEntityTypeConfiguration<PlanetModel>
     public void Configure(EntityTypeBuilder<PlanetModel> builder)
     {
         builder.ToTable("planets");
-        builder.HasKey(x => x.PlanetId);
-        builder.Property(x => x.PlanetId)
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id)
             .HasColumnName("id");
 
         builder.Property(x => x.Name)
@@ -40,5 +40,7 @@ public class PlanetConfiguration : IEntityTypeConfiguration<PlanetModel>
         builder.Property(x => x.Population)
             .HasColumnName("population");
 
+        builder.Ignore(x => x.Characters);
+        builder.Ignore(x => x.Movies);
     }
 }

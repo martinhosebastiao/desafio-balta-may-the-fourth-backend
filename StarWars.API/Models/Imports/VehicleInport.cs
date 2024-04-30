@@ -1,6 +1,6 @@
 namespace StarWars.API.Models.Imports;
 
-public class VehicleInport
+public class VehicleImport
 {
     public string Message { get; set; }
     public List<VehicleResult> Results { get; set; }
@@ -16,7 +16,7 @@ public class VehicleResult
     public string Length { get; set; }
     public string max_atmosphering_speed { get; set; }
     public string? Crew { get; set; }
-    public string? Passengers { get; set; }
+    public string? passengers { get; set; }
     public string cargo_capacity { get; set; }
     public string Consumables { get; set; }
     public string vehicle_class { get; set; }
@@ -35,7 +35,7 @@ public VehicleModel ConvertToModel()
             Length = Length,
             MaxSpeed = max_atmosphering_speed,
             Crew = Crew,
-            Passengers = Passengers,
+            Passengers = passengers,
             CargoCapacity = cargo_capacity,
             Consumables = Consumables,
             Class = vehicle_class,

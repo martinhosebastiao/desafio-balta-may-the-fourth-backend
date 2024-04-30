@@ -4,7 +4,7 @@ public class StarshipModel
 {
     public StarshipModel() { }
 
-    public int StarshipId { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public string Model {  get; set; }
     public string Manufacturer { get; set; }
@@ -18,4 +18,5 @@ public class StarshipModel
     public string HyperdriveRating { get; set; }
     public string MGLT { get; set; }
     public string StarshipClass { get; set; }
+    public List<MovieModel>? Movies { get; set; }
 }

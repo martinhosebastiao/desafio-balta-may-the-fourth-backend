@@ -10,9 +10,11 @@ namespace StarWars.API.Storages.Datas.EntityConfigurations
         public void Configure(EntityTypeBuilder<MovieModel> builder)
         {
             builder.ToTable("movies");
-            builder.HasKey(x=> x.MovieId);
-            builder.Property(x=> x.MovieId)
-                .HasColumnName("Id");
+
+            builder.HasKey(x=> x.Id);
+            builder.Property(x=> x.Id)
+                .HasColumnName("Id")
+                .ValueGeneratedOnAdd();
 
             builder.Property(x => x.Title)
                 .HasColumnName("title");
@@ -32,9 +34,13 @@ namespace StarWars.API.Storages.Datas.EntityConfigurations
             builder.Property(x => x.ReleaseDate)
                 .HasColumnName("releaseDate");
 
-            builder.Ignore(x => x.Url);
+            builder.Property(x => x.Url)
+               .HasColumnName("Url");
 
-            //builder.Ignore(x=> x.Vehicles);
+            builder.Ignore(x => x.Characters);
+            builder.Ignore(x=> x.Planets);
+            builder.Ignore(x=> x.Vehicles);
+            builder.Ignore(x=> x.Starships);
         }
     }
 }

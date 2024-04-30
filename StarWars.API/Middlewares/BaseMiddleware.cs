@@ -17,6 +17,12 @@ namespace StarWars.API.Middlewares
             services.AddSwaggerDocs();
             services.AddApiVersioningConfig();
 
+            // Aplicação de cache para todos endpoints
+            services.AddOutputCache(options =>
+            {
+                options.AddBasePolicy(builder => builder.Expire(TimeSpan.FromMinutes(5)));
+            });
+
             return services;
 		}
 

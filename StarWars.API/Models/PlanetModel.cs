@@ -6,7 +6,7 @@ public class PlanetModel
     {
     }
 
-    public int PlanetId { get;  set; }
+    public int Id { get;  set; }
     public string Name { get;  set; }
     public string RotationPeriod { get;  set; }
     public string OrbitalPeriod { get;  set; }
@@ -16,5 +16,6 @@ public class PlanetModel
     public string Terrain { get;  set; }
     public string SurfaceWater {  get;  set; }
     public string Population { get;  set; }
-    public List<CharacterModel> characters { get; set; }
+    public List<CharacterModel> Characters { get; set; }
+    public List<MovieModel> Movies { get; set; }
 }

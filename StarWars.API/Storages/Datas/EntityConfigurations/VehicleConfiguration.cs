@@ -9,8 +9,8 @@ public class VehicleConfiguration : IEntityTypeConfiguration<VehicleModel>
     public void Configure(EntityTypeBuilder<VehicleModel> builder)
     {
         builder.ToTable("vehicles");
-        builder.HasKey(v => v.VehicleId);
-        builder.Property(v => v.VehicleId)
+        builder.HasKey(v => v.Id);
+        builder.Property(v => v.Id)
             .HasColumnName("id")
             .ValueGeneratedOnAdd();
 
@@ -31,7 +31,7 @@ public class VehicleConfiguration : IEntityTypeConfiguration<VehicleModel>
             .HasColumnName("crew");
 
         builder.Property(v => v.Passengers)
-            .HasColumnName("passengers ");
+            .HasColumnName("passengers");
 
         builder.Property(v => v.Consumables)
            .HasColumnName("consumables");
@@ -47,5 +47,8 @@ public class VehicleConfiguration : IEntityTypeConfiguration<VehicleModel>
 
         builder.Property(v => v.Class)
             .HasColumnName("vehicle_class");
+
+
+        builder.Ignore(x => x.Movies);
     }
 }
