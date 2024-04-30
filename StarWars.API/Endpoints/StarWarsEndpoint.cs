@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using StarWars.API.Services;
 
 namespace StarWars.API.Endpoints
@@ -60,6 +59,23 @@ namespace StarWars.API.Endpoints
             }).WithName($"GetPlanetsAsync{routePrefix}")
             .Produces(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound);
+
+            route.MapGet($"{routePrefix}/getvehicles", async (
+                    [FromServices] IStarWarsService starWarsService,
+                    CancellationToken CancellationToken) =>
+                {
+                    var _vehicles = await starWarsService.GetVehicleAsync(
+                        CancellationToken);
+                    if (_vehicles is null)
+                    {
+                        return Results.NotFound();
+                    }
+
+                    return Results.Ok(_vehicles);
+                })
+                .WithName($"GetVehiclesAsync{routePrefix}")
+                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound);
 
             return route;
         }

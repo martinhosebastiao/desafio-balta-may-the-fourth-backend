@@ -9,10 +9,11 @@ public class VehicleConfiguration : IEntityTypeConfiguration<VehicleModel>
     public void Configure(EntityTypeBuilder<VehicleModel> builder)
     {
         builder.ToTable("vehicles");
-
         builder.HasKey(v => v.VehicleId);
         builder.Property(v => v.VehicleId)
-            .HasColumnName("id");
+            .HasColumnName("id")
+            .ValueGeneratedOnAdd();
+
 
         builder.Property(v => v.Name)
             .HasColumnName("name");

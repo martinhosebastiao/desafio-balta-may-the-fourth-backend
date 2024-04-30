@@ -10,13 +10,13 @@ Desenvolvimento de uma API completa, fornecendo recursos como criação, leitura
 
 ## Participantes
 ### 🚀 Capitão
-[Martinho Sebastião e [GITHUB](https://github.com/martinhosebastiao)]
+Martinho Sebastião | [GITHUB](https://github.com/martinhosebastiao)
 
 ### 💂‍♀️ Batalhão
-* [NOME e GITHUB]
-* [NOME e GITHUB]
-* [NOME e GITHUB]
-* [NOME e GITHUB]
+* Mizael Douglas | [GITHUB](https://github.com/mizaeldouglas)
+* Bernardo Meine | [GITHUB](https://github.com/BernardoMeine)
+* Mark Souza | [GITHUB](https://github.com/Marksouzza1)
+
 
 ## ⚙️ Tecnologias
 * C# 12
