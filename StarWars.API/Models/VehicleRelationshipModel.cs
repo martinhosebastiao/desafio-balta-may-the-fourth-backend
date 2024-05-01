@@ -28,7 +28,7 @@ namespace StarWars.API.Models
                 return 0;
             }
 
-            input = input?.Replace("https://swapi.py4e.com/api/", "");
+            input = input?.Replace("https://swapi.py4e.com/api/starships/", "");
 
             // Cria um padrão regex para encontrar apenas dígitos numéricos
             Regex regex = new Regex(@"\d+");
