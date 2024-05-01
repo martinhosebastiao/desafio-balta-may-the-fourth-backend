@@ -3,14 +3,6 @@ using System.Text.RegularExpressions;
 
 namespace StarWars.API.Models
 {
-    public enum TargetType : byte
-    {
-        Character = 1,
-        Planet = 2,
-        Starship = 3,
-        Vehicle = 4
-    }
-
     public class MovieRelationshipModel
     {
         public MovieRelationshipModel(int movieId)
