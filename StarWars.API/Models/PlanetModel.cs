@@ -4,6 +4,8 @@ public class PlanetModel
 {
     public PlanetModel()
     {
+        Characters = new List<CharacterModel>();
+        Movies = new List<MovieModel>();
     }
     public int Id { get;  set; }
     public string Name { get;  set; }
@@ -15,6 +17,6 @@ public class PlanetModel
     public string Terrain { get;  set; }
     public string SurfaceWater {  get;  set; }
     public string Population { get;  set; }
-    public List<CharacterModel> Characters { get; set; }
-    public List<MovieModel> Movies { get; set; }
+    public List<CharacterModel>? Characters { get; set; }
+    public List<MovieModel>? Movies { get; set; }
 }

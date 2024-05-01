@@ -8,7 +8,7 @@ namespace StarWars.API.Models
         Character = 1,
         Planet = 2,
         Starship = 3,
-        Vehicle = 4
+        Vehicle = 4,
     }
 
     public class MovieRelationshipModel

@@ -84,11 +84,40 @@ namespace StarWars.API.Services
             return planet;
         }
 
-        public async Task<List<PlanetModel>?> GetPlanetsAsync(CancellationToken cancellationToken)
+        public async Task<dynamic> GetPlanetsAsync(CancellationToken cancellationToken)
         {
             var planets = await _starWarsRepository.GetPlanetsAsync(cancellationToken);
 
-            return planets;
+            if(planets == null)
+            {
+                return null;
+            }
+
+            var _planets = planets.Select(x => new
+            {
+                x.Name,
+                x.RotationPeriod,
+                x.OrbitalPeriod,
+                x.Diameter,
+                x.Climate,
+                x.Gravity,
+                x.Terrain,
+                x.SurfaceWater,
+                x.Population,
+                residents = x.Characters?.Select(k => new
+                {
+                    k.Id,
+                    k.Name
+                }).ToList(),
+                movies = x.Movies?.Select(k => new
+                {
+                    k.Id,
+                    k.Title
+                }).ToList(),
+
+            }).ToList();
+
+            return _planets;
         }
 
         public async Task<List<VehicleModel>?> GetVehicleAsync(CancellationToken cancellationToken)

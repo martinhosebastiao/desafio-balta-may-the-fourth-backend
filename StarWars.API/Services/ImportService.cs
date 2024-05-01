@@ -22,23 +22,10 @@ namespace StarWars.API.Services
         public async Task<bool> FromSwapiAsync(
             CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD
-            // Todo: Implementar os demais endpoints
-            var planets = await ImportPlanetsAsync(cancellationToken);
-            var response = planets;
+            var model = await ImportPlanetsAsync(cancellationToken);
+            var response = model;
 
             return response;
-=======
-            var planets = await ImportPlanetsAsync(cancellationToken);
-            var vehicles = await ImportVehiclesAsync(cancellationToken);
-            var starships = await ImportStarshipsAsync(cancellationToken);
-            var movies = await ImportMoviesAsync(cancellationToken);
-            var characters = await ImportCharactersAsync(cancellationToken);
-
-            var result = (planets == characters == movies == starships
-                == vehicles);
-            return result;
->>>>>>> 6583b4d37a551b3d6d79b2b09af866bf7eb81781
         }
 
         private async Task<bool> ImportMoviesAsync(
@@ -132,7 +119,7 @@ namespace StarWars.API.Services
         private async Task<bool> ImportCharactersAsync(
             CancellationToken cancellationToken)
         {
-            string charactersUrl = "https://swapi.py4e.com/api/people";
+            string charactersUrl = "https://swapi.py4e.com/api/people/?page=9";
 
             var response = await _httpClient.GetFromJsonAsync<CharacterImport>(
                 charactersUrl, cancellationToken: cancellationToken);
@@ -174,7 +161,7 @@ namespace StarWars.API.Services
         private async Task<bool> ImportPlanetsAsync(
             CancellationToken cancellationToken)
         {
-            string planetsUrl = "https://swapi.py4e.com/api/planets";
+            string planetsUrl = "https://swapi.py4e.com/api/planets/?page=2";
 
             var response = await _httpClient.GetFromJsonAsync<PlanetImport>(
                 planetsUrl, cancellationToken: cancellationToken);
@@ -190,19 +177,44 @@ namespace StarWars.API.Services
                     var model = planet.ConvertToModel();
 
                     var existPlanet = await _starWarsRepository
-                        .GetPlanetByIdAsync(
-                        model.Id,
+                        .GetPlanetByNameAsync(
+                        model.Name,
                         cancellationToken);
 
                     if (existPlanet is null)
                     {
                         var _planet = await _starWarsRepository.CreatePlanetAsync(
-                                              model, cancellationToken);
+                                              model,
+                                              cancellationToken);
 
                         if (_planet is null)
                         {
                             i++;
                             _errors.Add(i);
+                        }
+                        else
+                        {
+                            // Obter a lista de personagens do filme atual e
+                            // adicionar na tabela de relacionamento
+                            foreach (var item in planet.Residents)
+                            {
+                                var _model = new PlanetRelationshipModel(_planet.Id);
+                                _model.AddCharacters(item);
+
+                                await _starWarsRepository
+                                    .CreatePlanetRelationshipAsync(
+                                        _model, cancellationToken);
+                            }
+
+                            foreach (var item in planet.Films)
+                            {
+                                var _model = new PlanetRelationshipModel(_planet.Id);
+                                _model.AddMovies(item);
+
+                                await _starWarsRepository
+                                    .CreatePlanetRelationshipAsync(
+                                        _model, cancellationToken);
+                            }
                         }
                     }
                 }
@@ -233,7 +245,7 @@ namespace StarWars.API.Services
 
                     var existVehicles = await _starWarsRepository
                         .GetVehicleByIdAsync(
-                            model.VehicleId,
+                            model.Id,
                             cancellationToken);
 
                     if (existVehicles is null)

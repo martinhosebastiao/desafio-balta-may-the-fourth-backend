@@ -18,7 +18,10 @@ namespace StarWars.API.Storages.Repositores
         Task<MovieModel?> CreateMovieAsync(
             MovieModel model, CancellationToken cancellationToken = default);
 
-		Task<CharacterModel?> GetCharacterByIdAsync(
+        Task<List<CharacterModel>?> GetCharactersAsync(
+            CancellationToken cancellationToken = default);
+
+        Task<CharacterModel?> GetCharacterByIdAsync(
 			int characterId, 
 			CancellationToken cancellationToken = default);
 
@@ -29,32 +32,17 @@ namespace StarWars.API.Storages.Repositores
 		   int planetId,
 		   CancellationToken cancellationToken = default);
 
-		Task<PlanetModel?> CreatePlanetAsync(
+        Task<PlanetModel?> GetPlanetByNameAsync(
+            string name,
+            CancellationToken cancellationToken = default);
+
+
+        Task<PlanetModel?> CreatePlanetAsync(
 			PlanetModel model,
 			CancellationToken cancellationToken = default);
 
 		Task<List<PlanetModel?>> GetPlanetsAsync(
             CancellationToken cancellationToken = default);
-        Task<List<CharacterModel>?> GetCharactersAsync(
-            CancellationToken cancellationToken = default);
-
-        Task<CharacterModel?> GetCharacterByIdAsync(
-                int characterId,
-                CancellationToken cancellationToken = default);
-
-        Task<CharacterModel?> CreateCharacterAsync(
-            CharacterModel model, CancellationToken cancellationToken = default);
-
-        Task<PlanetModel?> GetPlanetByIdAsync(
-           int planetId,
-           CancellationToken cancellationToken = default);
-
-        Task<PlanetModel?> CreatePlanetAsync(
-            PlanetModel model,
-            CancellationToken cancellationToken = default);
-
-        Task<List<PlanetModel?>> GetPlanetsAsync(
-                 CancellationToken cancellationToken = default);
 
         Task<List<VehicleModel>?> GetVehicleAsync(
             CancellationToken cancellationToken = default);
@@ -76,6 +64,10 @@ namespace StarWars.API.Storages.Repositores
 
         Task<MovieRelationshipModel?> CreateRelationalShipAsync(
             MovieRelationshipModel model,
+            CancellationToken cancellationToken = default);
+
+        Task<PlanetRelationshipModel?> CreatePlanetRelationshipAsync(
+            PlanetRelationshipModel model,
             CancellationToken cancellationToken = default);
     }
 }

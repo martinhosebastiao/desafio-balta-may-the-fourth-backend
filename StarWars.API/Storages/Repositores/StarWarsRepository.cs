@@ -127,7 +127,8 @@ namespace StarWars.API.Storages.Repositores
             return response;
         }
 
-        public async Task<CharacterModel?> CreateCharacterAsync(CharacterModel model, CancellationToken cancellationToken = default)
+        public async Task<CharacterModel?> CreateCharacterAsync(
+            CharacterModel model, CancellationToken cancellationToken = default)
         {
             _context.Characters.Add(model);
 
@@ -146,6 +147,15 @@ namespace StarWars.API.Storages.Repositores
             return response;
         }
 
+        public async Task<PlanetModel?> GetPlanetByNameAsync(string name,
+            CancellationToken cancellationToken = default)
+        {
+            var response = await _context.Planets.Where(x => x.Name == name)
+                 .FirstOrDefaultAsync(cancellationToken);
+
+            return response;
+        }
+
         public async Task<PlanetModel?> CreatePlanetAsync(PlanetModel model, CancellationToken cancellationToken = default)
         {
             _context.Planets.Add(model);
@@ -153,6 +163,51 @@ namespace StarWars.API.Storages.Repositores
             var result = await _context.SaveChangesAsync(cancellationToken);
 
             return result == 0 ? null : model;
+        }
+        public async Task<List<PlanetModel>?> GetPlanetsAsync(CancellationToken cancellationToken = default)
+        {
+            var response = await (from planet in _context.Planets.AsNoTracking()
+                                  select new
+                                  {
+                                      planet,
+                                      residents = (from rel in _context.PlanetRelationships
+                                                 join person in _context.Characters on rel.TargetId equals person.Id
+                                                 where rel.PlanetId == planet.Id && rel.Type == PlanetTargetType.Resident
+                                                 select person
+                                                 ).ToList(),
+                                      films = (from rel in _context.PlanetRelationships
+                                                join movie in _context.Movies on rel.TargetId equals movie.Id
+                                                 where rel.PlanetId == planet.Id && rel.Type == PlanetTargetType.Film
+                                                 select movie
+                                                 ).ToList()
+                                  })
+                                  .AsNoTracking()
+                                  .ToListAsync(cancellationToken: cancellationToken);
+
+            var _planets = new List<PlanetModel>();
+            int planetContol = 0;
+
+            foreach (var item in response)
+            {
+                if (planetContol != item?.planet?.Id && item?.planet != null)
+                {
+                    if (item.residents.Count > 0)
+                    {
+                        item.planet?.Characters?.AddRange(item.residents);
+                    }
+
+                    if (item.films.Count > 0)
+                    {
+                        item.planet?.Movies?.AddRange(item.films);
+                    }
+
+                    _planets.Add(item.planet!);
+
+                    planetContol = item.planet.Id;
+                }
+            }
+
+            return _planets;
         }
 
         public async Task<List<VehicleModel>?> GetVehicleAsync(
@@ -163,12 +218,6 @@ namespace StarWars.API.Storages.Repositores
             return response;
         }
 
-        public async Task<List<PlanetModel>?> GetPlanetsAsync(CancellationToken cancellationToken = default)
-        {
-            var response = await _context.Planets.ToListAsync(cancellationToken);
-
-            return response;
-        }
 
         public async Task<StarshipModel?> GetStarshipByIdAsync(
            int starshipId,
@@ -193,7 +242,7 @@ namespace StarWars.API.Storages.Repositores
             int Id,
             CancellationToken cancellationToken = default)
         {
-            var response = await _context.Vehicles.Where(x => x.VehicleId == Id)
+            var response = await _context.Vehicles.Where(x => x.Id == Id)
                 .FirstOrDefaultAsync(cancellationToken);
 
             return response;
@@ -214,6 +263,17 @@ namespace StarWars.API.Storages.Repositores
             CancellationToken cancellationToken = default)
         {
             _context.MovieRelationships.Add(model);
+
+            var result = await _context.SaveChangesAsync(cancellationToken);
+
+            return result == 0 ? null : model;
+        }
+
+        public async Task<PlanetRelationshipModel?> CreatePlanetRelationshipAsync(
+            PlanetRelationshipModel model,
+            CancellationToken cancellationToken = default)
+        {
+            _context.PlanetRelationships.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
 

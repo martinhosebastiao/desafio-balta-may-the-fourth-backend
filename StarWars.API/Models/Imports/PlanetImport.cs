@@ -2,12 +2,15 @@
 
 public class PlanetImport
 {
-    public string Message { get; set; }
+    public int count { get; set; }
+    public object next { get; set; }
+    public object previous { get; set; }
     public List<PlanetResult> Results { get; set; }
 }
 
 public class PlanetResult
 {
+    public PlanetResult() { }
     public string Name { get; set; }
     public string Rotation_Period { get; set; }
     public string Orbital_Period { get; set; }
@@ -17,8 +20,8 @@ public class PlanetResult
     public string Terrain { get; set; }
     public string Surface_Water { get; set; }
     public string Population { get; set; }
-    // public List<CharacterModel> Residents { get; set; }
-   // public List<MovieModel> Films { get; set; }
+    public List<string> Residents { get; set; }
+    public List<string> Films { get; set; }
 
     public PlanetModel ConvertToModel()
     {

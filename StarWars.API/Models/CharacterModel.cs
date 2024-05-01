@@ -5,7 +5,6 @@ public sealed class CharacterModel
     public CharacterModel() {}
 
     public int Id { get; set; }
-    public int? PlanetId { get; set; }
     public string Name { get; set; }
     public string Height { get; set; }
     public string Mass { get;  set; }
