@@ -10,8 +10,8 @@ public class StarshipConfiguration : IEntityTypeConfiguration<StarshipModel>
     {
         builder.ToTable("starships");
 
-        builder.HasKey(x => x.StarshipId);
-        builder.Property(x => x.StarshipId)
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id)
             .HasColumnName("id");
 
         builder.Property(x => x.Name)
@@ -58,5 +58,8 @@ public class StarshipConfiguration : IEntityTypeConfiguration<StarshipModel>
 
         builder.Property(x => x.StarshipClass)
             .HasColumnName("starship_class");
+
+
+        builder.Ignore(x => x.Movies);
     }
 }

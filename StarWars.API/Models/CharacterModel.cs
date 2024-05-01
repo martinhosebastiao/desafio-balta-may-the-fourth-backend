@@ -2,10 +2,10 @@
 
 public sealed class CharacterModel
 {
-    public CharacterModel()
-    {}
+    public CharacterModel() {}
 
-    public int CharacterId { get; set; }
+    public int Id { get; set; }
+    public int? PlanetId { get; set; }
     public string Name { get; set; }
     public string Height { get; set; }
     public string Mass { get;  set; }
@@ -14,8 +14,6 @@ public sealed class CharacterModel
     public string EyeColor { get; set; }
     public string BirthYear { get; set; }
     public string Gender { get; set; }
-    public DateTime Edited { get; set; }
-    public DateTime Created { get; set; }
-    // public PlanetModel Planet { get; set; }
-    // public List<MovieModel> Movies { get; set; }
+    public PlanetModel Planet { get; set; }
+    public List<MovieModel> Movies { get; set; }
 }

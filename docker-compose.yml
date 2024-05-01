@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  mas_api_starwars:
+    image: ${DOCKER_REGISTRY-}masinovacoes
+    container_name: mas_api_starwars
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+      - "443"
+    build:
+      context: .
+      network: starWars_default
+      dockerfile: StarWars.API/Dockerfile

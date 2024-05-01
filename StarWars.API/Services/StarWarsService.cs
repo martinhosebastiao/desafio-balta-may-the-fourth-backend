@@ -3,8 +3,8 @@ using StarWars.API.Storages.Repositores;
 
 namespace StarWars.API.Services
 {
-    public class StarWarsService: IStarWarsService
-	{
+    public class StarWarsService : IStarWarsService
+    {
         private readonly IStarWarsRepository _starWarsRepository;
 
         public StarWarsService(IStarWarsRepository starWarsRepository)
@@ -19,16 +19,53 @@ namespace StarWars.API.Services
             return movie;
         }
 
-        public async Task<List<MovieModel>?> GetMoviesAsync(CancellationToken cancellationToken)
+        public async Task<dynamic?> GetMoviesAsync(CancellationToken cancellationToken)
         {
             var movies = await _starWarsRepository.GetMoviesAsync(cancellationToken);
 
-            return movies;
+            if (movies is null)
+            {
+                return null;
+            }
+
+            var _movies = movies.Select(x => new
+            {
+                x.Title,
+                episode = x.EpisodeId,
+                x.OpeningCrawl,
+                x.Director,
+                x.Producer,
+                x.ReleaseDate,
+                characters = x.Characters?.Select(k => new
+                {
+                    k.Id,
+                    k.Name
+                }).ToList(),
+                planets = x.Planets?.Select(k => new
+                {
+                    k.Id,
+                    k.Name
+                }).ToList(),
+                vehicles = x.Vehicles?.Select(k => new
+                {
+                    k.Id,
+                    k.Name
+                }).ToList(),
+                starships = x.Starships?.Select(k => new
+                {
+                    k.Id,
+                    k.Name
+                }).ToList(),
+
+            }).ToList();
+
+            return _movies;
         }
 
         public async Task<CharacterModel?> GetCharacterByIdAsync(int characterId, CancellationToken cancellationToken)
         {
             var character = await _starWarsRepository.GetCharacterByIdAsync(characterId, cancellationToken);
+
 
             return character;
         }
@@ -49,11 +86,11 @@ namespace StarWars.API.Services
 
         public async Task<List<PlanetModel>?> GetPlanetsAsync(CancellationToken cancellationToken)
         {
-            var characters = await _starWarsRepository.GetPlanetsAsync(cancellationToken);
+            var planets = await _starWarsRepository.GetPlanetsAsync(cancellationToken);
 
-            return characters;
+            return planets;
         }
-        
+
         public async Task<List<VehicleModel>?> GetVehicleAsync(CancellationToken cancellationToken)
         {
             var vehicle = await _starWarsRepository.GetVehicleAsync(cancellationToken);

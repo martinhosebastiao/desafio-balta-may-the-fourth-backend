@@ -47,5 +47,8 @@ public class VehicleConfiguration : IEntityTypeConfiguration<VehicleModel>
 
         builder.Property(v => v.Class)
             .HasColumnName("vehicle_class");
+
+
+        builder.Ignore(x => x.Movies);
     }
 }
