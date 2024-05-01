@@ -2,12 +2,15 @@
 
 public class StarshipImport
 {
-    public string Message { get; set; }
+    public int count { get; set; }
+    public object next { get; set; }
+    public object previous { get; set; }
     public List<StarshipResult> Results { get; set; }
 }
 
 public class StarshipResult
 {
+    public StarshipResult() { }
     public string Model { get; set; }
     public string Name { get; set; }
     public string Manufacturer { get; set; }
@@ -21,8 +24,8 @@ public class StarshipResult
     public string Hyperdrive_Rating { get; set; }
     public string MGLT { get; set; }
     public string Starship_Class { get; set; }
-    public List<string> Characters { get; set; }
-    public List<string> Movies { get; set; }
+    public List<string> Pilots { get; set; }
+    public List<string> Films { get; set; }
 
     public StarshipModel ConvertToModel()
     {
