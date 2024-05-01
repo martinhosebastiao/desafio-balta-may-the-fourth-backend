@@ -20,13 +20,13 @@ public class CharacterConfiguration : IEntityTypeConfiguration<CharacterModel>
         builder.Property(x => x.HairColor).HasMaxLength(50)
                .HasColumnName("hair_color"); 
 
-        builder.Property(x => x.SkinColor).HasMaxLength(50); 
+        builder.Property(x => x.SkinColor).HasMaxLength(50) 
                .HasColumnName("skin_color");
 
-        builder.Property(x => x.EyeColor).HasMaxLength(50); 
+        builder.Property(x => x.EyeColor).HasMaxLength(50) 
                .HasColumnName("eye_color");
 
-        builder.Property(x => x.BirthYear).HasMaxLength(10); 
+        builder.Property(x => x.BirthYear).HasMaxLength(10)
                .HasColumnName("birth_year");
 
         builder.Property(x => x.Gender).HasMaxLength(10);

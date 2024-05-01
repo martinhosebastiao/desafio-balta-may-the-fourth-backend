@@ -31,7 +31,7 @@ public class VehicleConfiguration : IEntityTypeConfiguration<VehicleModel>
             .HasColumnName("crew");
 
         builder.Property(v => v.Passengers)
-            .HasColumnName("passengers ");
+            .HasColumnName("passengers");
 
         builder.Property(v => v.Consumables)
            .HasColumnName("consumables");

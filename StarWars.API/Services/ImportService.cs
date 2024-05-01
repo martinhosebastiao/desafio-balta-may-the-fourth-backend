@@ -23,10 +23,10 @@ namespace StarWars.API.Services
             CancellationToken cancellationToken = default)
         {
             // Todo: Implementar os demais endpoints
-            // var planets = await ImportPlanetsAsync(cancellationToken);
-            var vehicles = await ImportVehiclesAsync(cancellationToken);
-            var starships = await ImportStarshipsAsync(cancellationToken);
-            return characters = movies = starships = vehicles;
+            var planets = await ImportPlanetsAsync(cancellationToken);
+            var response = planets;
+
+            return response;
         }
 
         private async Task<bool> ImportMoviesAsync(
@@ -176,7 +176,7 @@ namespace StarWars.API.Services
 
                     var existVehicles = await _starWarsRepository
                         .GetVehicleByIdAsync(
-                            model.Id,
+                            model.VehicleId,
                             cancellationToken);
 
                     if (existVehicles is null)

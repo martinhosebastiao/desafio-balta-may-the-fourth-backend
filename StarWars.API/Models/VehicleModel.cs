@@ -2,7 +2,7 @@ namespace StarWars.API.Models;
 
 public class VehicleModel
 {
-    public int Id { get; set; }
+    public int VehicleId { get; set; }
     public string Name { get; set; }
     public string Model { get; set; }
     public string Manufacturer { get; set; }
@@ -14,6 +14,6 @@ public class VehicleModel
     public string? CargoCapacity { get; set; }
     public string Consumables { get; set; }
     public string? Class { get; set; }
-    public List<MovieModel>? Movies { get; set; }
-    public List<CharacterModel>? Character { get; set; }
+    // public List<MovieModel>? Movies { get; set; }
+    // public List<CharacterModel>? Character { get; set; }
 }

@@ -20,8 +20,8 @@ public class VehicleResult
     public string cargo_capacity { get; set; }
     public string Consumables { get; set; }
     public string vehicle_class { get; set; }
-    public List<MovieModel> Movies { get; set; }
-    public List<CharacterModel> Character { get; set; }
+    // public List<MovieModel> Movies { get; set; }
+    // public List<CharacterModel> Character { get; set; }
 
 
 public VehicleModel ConvertToModel()
