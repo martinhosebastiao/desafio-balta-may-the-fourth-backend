@@ -9,6 +9,7 @@ public class VehicleImport
 
 public class VehicleResult
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     public string Model { get; set; }
     public string Manufacturer { get; set; }
@@ -20,14 +21,14 @@ public class VehicleResult
     public string cargo_capacity { get; set; }
     public string Consumables { get; set; }
     public string vehicle_class { get; set; }
-    // public List<MovieModel> Movies { get; set; }
-    // public List<CharacterModel> Character { get; set; }
+    public List<string> Movies { get; set; }
 
 
-public VehicleModel ConvertToModel()
+    public VehicleModel ConvertToModel()
     {
         return new VehicleModel
         {
+            Id = Id,
             Name = Name,
             Model = Model,
             Manufacturer = Manufacturer,
@@ -39,7 +40,7 @@ public VehicleModel ConvertToModel()
             CargoCapacity = cargo_capacity,
             Consumables = Consumables,
             Class = vehicle_class,
-            
+
         };
     }
 }

@@ -58,6 +58,12 @@ namespace StarWars.API.Storages.Repositores
             StarshipModel model,
             CancellationToken cancellationToken = default);
 
+        /// <summary>
+        /// Cria um novo Veiculo
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Retorna os dados do veiculo criado, em caso de sucesso</returns>
         Task<VehicleModel?> CreateVehicleAsync(VehicleModel model,
             CancellationToken cancellationToken = default);
 
@@ -76,7 +82,10 @@ namespace StarWars.API.Storages.Repositores
         Task<StarshipRelationshipModel?> CreateStarshipRelationshipAsync(
             StarshipRelationshipModel model,
             CancellationToken cancellationToken = default);
-
+      
+        Task<VehicleRelationshipModel?> CreateVehicleRelationalShipAsync(
+        VehicleRelationshipModel model,
+        CancellationToken cancellationToken = default);
     }
 }
 
