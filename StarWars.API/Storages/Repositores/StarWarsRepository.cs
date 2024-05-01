@@ -42,14 +42,14 @@ namespace StarWars.API.Storages.Repositores
                                                  select planet
                                                  ).ToList(),
                                       vehicles = (from rel in _context.MovieRelationships
-                                                 join vehicle in _context.Vehicles on rel.TargetId equals vehicle.Id
-                                                 where rel.MovieId == movie.Id && rel.Type == TargetType.Vehicle
-                                                 select vehicle
+                                                  join vehicle in _context.Vehicles on rel.TargetId equals vehicle.Id
+                                                  where rel.MovieId == movie.Id && rel.Type == TargetType.Vehicle
+                                                  select vehicle
                                                  ).ToList(),
                                       starship = (from rel in _context.MovieRelationships
-                                                 join starship in _context.Starships on rel.TargetId equals starship.Id
-                                                 where rel.MovieId == movie.Id && rel.Type == TargetType.Starship
-                                                 select starship
+                                                  join starship in _context.Starships on rel.TargetId equals starship.Id
+                                                  where rel.MovieId == movie.Id && rel.Type == TargetType.Starship
+                                                  select starship
                                                  ).ToList()
                                   })
                                   .AsNoTracking()
@@ -81,7 +81,7 @@ namespace StarWars.API.Storages.Repositores
                     {
                         item.movie?.Starships?.AddRange(item.starship);
                     }
-    
+
                     _movies.Add(item.movie!);
 
                     movieContol = item.movie.Id;
@@ -269,11 +269,17 @@ namespace StarWars.API.Storages.Repositores
             return result == 0 ? null : model;
         }
 
+
         public async Task<PlanetRelationshipModel?> CreatePlanetRelationshipAsync(
             PlanetRelationshipModel model,
             CancellationToken cancellationToken = default)
         {
             _context.PlanetRelationships.Add(model);
+
+
+        public async Task<VehicleRelationshipModel?> CreateVehicleRelationalShipAsync(VehicleRelationshipModel model, CancellationToken cancellationToken = default)
+        {
+            _context.VehicleRelationships.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
 

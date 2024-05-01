@@ -21,6 +21,7 @@ namespace StarWars.API.Storages.Datas
         public DbSet<VehicleModel> Vehicles { get; private set; }
         public DbSet<MovieRelationshipModel> MovieRelationships { get; private set; }
         public DbSet<PlanetRelationshipModel> PlanetRelationships { get; private set; }
+        public DbSet<VehicleRelationshipModel> VehicleRelationships { get; private set; }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -46,6 +47,7 @@ namespace StarWars.API.Storages.Datas
             modelBuilder.ApplyConfiguration(new VehicleConfiguration());
             modelBuilder.ApplyConfiguration(new MovieRelationshipConfiguration());
             modelBuilder.ApplyConfiguration(new PlanetRelationshipConfiguration());
+            modelBuilder.ApplyConfiguration(new VehicleRelationshipConfiguration());
 
             modelBuilder.UsePropertyAccessMode(PropertyAccessMode.Property);
 

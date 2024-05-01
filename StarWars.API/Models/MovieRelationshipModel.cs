@@ -10,7 +10,7 @@ namespace StarWars.API.Models
         Starship = 3,
         Vehicle = 4,
     }
-
+    
     public class MovieRelationshipModel
     {
         public MovieRelationshipModel(int movieId)

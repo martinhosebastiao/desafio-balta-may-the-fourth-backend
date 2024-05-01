@@ -258,7 +258,20 @@ namespace StarWars.API.Services
                             i++;
                             _errors.Add(i);
                         }
+                        else
+                        {
+                            foreach (var item in vehicles.Movies)
+                            {
+                                var _model = new VehicleRelationshipModel(_vehicles.Id);
+                                _model.AddMovie(item);
+
+                                await _starWarsRepository
+                                    .CreateVehicleRelationalShipAsync(
+                                        _model, cancellationToken);
+                            }
+                        }
                     }
+
                 }
             }
 

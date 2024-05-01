@@ -2,6 +2,11 @@ namespace StarWars.API.Models;
 
 public class VehicleModel
 {
+    public VehicleModel()
+    {
+        Movies = new List<MovieModel>();
+    }
+
     public int Id { get; set; }
     public string Name { get; set; }
     public string Model { get; set; }

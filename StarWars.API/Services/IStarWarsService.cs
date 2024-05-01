@@ -11,7 +11,7 @@ namespace StarWars.API.Services
 		Task<CharacterModel?> GetCharacterByIdAsync(int characterId, CancellationToken cancellationToken);
 		Task<PlanetModel?> GetPlanetByIdAsync(int planetId, CancellationToken cancellationToken);
 		Task<dynamic?> GetPlanetsAsync(CancellationToken cancellationToken);
-		Task<List<VehicleModel>?> GetVehicleAsync(CancellationToken cancellationToken);
+		Task<dynamic?> GetVehicleAsync(CancellationToken cancellationToken);
 	}
 }
 

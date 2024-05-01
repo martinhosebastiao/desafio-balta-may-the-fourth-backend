@@ -30,8 +30,92 @@ Martinho Sebastião | [GITHUB](https://github.com/martinhosebastiao)
 * Networking
 * Muito conhecimento técnico
 
-## 🧪 Como testar o projeto
-[DESCREVER COMO EXECUTAR O PROJETO]
+## 🧪 Como testar o projeto com Swagger
+
+##### Link para testar
+https://starwars.masinovacoes.com/docs/index.html
+
+##### Endpoint
+```c#
+  https://starwars.masinovacoes.com/api/v1.1/startwars/
+    /getmovies
+    /getcharacters
+    /getplanets
+    /getvehicles
+```
+##### Endpoint para popular banco de dados
+```
+https://starwars.masinovacoes.com/api/v1.1/
+    /import/fromswapi
+```
+
+## 🧪 Como testar o projeto na sua máquina
+
+##### Instalação
+- Certifique-se de ter o .NET SDK instalado em sua máquina. Você pode baixar o SDK em https://dotnet.microsoft.com/download.
+
+- A versão do .NET que esta nesse Projeto é o .NET 8.0
+
+- O comando específico para instalar o .NET 8.0 pelo terminal depende do sistema operacional que você está usando.
+
+##### No Windows:
+- Com PowerShell:
+```bash
+  Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+  Install-Module dotnet
+  Import-Module dotnet
+  Install-Package dotnet-sdk-8.0
+  ```
+- Com Prompt de Comando:
+
+```bash  
+dotnet-install.ps1 -InstallSDK 8.0
+```
+##### No macOS:
+```bash  
+brew install dotnet/core/dotnet-sdk8
+```
+##### No Linux:
+
+- Com Ubuntu:
+```bash  
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+sudo apt-get update
+sudo apt-get install dotnet-sdk-8.0
+```
+- Com outras distros:
+- Consulte a documentação do .NET para obter instruções específicas para sua distro: https://docs.microsoft.com/pt-br/dotnet/core/install/linux.
+
+##### Observações:
+
+- Certifique-se de ter um gerenciador de pacotes instalado em sua máquina.
+- O comando dotnet-install.ps1 só está disponível no Windows.
+- O comando brew só está disponível no macOS.
+- Os comandos para Linux podem variar dependendo da sua distro.
+
+##### Clonar o repositorio
+```bash
+git clone https://github.com/martinhosebastiao/desafio-balta-may-the-fourth-backend.git
+cd desafio-balta-may-the-fourth-backend/StarWars.API
+```
+
+
+##### Iniciar o projeto na sua máquina
+
+```bash
+dotnet restore
+```
+```bash
+dotnet clean
+```
+```bash
+dotnet build
+```
+```bash
+dotnet run urls=https://localhost:7271
+```
 
 # 💜 Participe
 Quer participar dos próximos desafios? Junte-se a [maior comunidade .NET do Brasil 🇧🇷 💜](https://balta.io/discord)
