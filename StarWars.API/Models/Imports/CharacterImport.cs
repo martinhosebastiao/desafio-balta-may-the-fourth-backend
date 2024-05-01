@@ -18,8 +18,6 @@ public class CharacterResult
     public string Eye_Color { get; set; }
     public string Birth_Year { get; set; }
     public string Gender { get; set; }
-    public DateTime Edited { get; set; }
-    public DateTime Created { get; set; }
     public string Planet { get; set; }
     public List<string> Movies { get; set; }
 
@@ -34,8 +32,7 @@ public class CharacterResult
             SkinColor = Skin_Color,
             EyeColor = Eye_Color,
             BirthYear = Birth_Year,
-            Gender = Gender,
-            PlanetId = ExtractIdFromUrl(Planet)
+            Gender = Gender
         };
     }
 

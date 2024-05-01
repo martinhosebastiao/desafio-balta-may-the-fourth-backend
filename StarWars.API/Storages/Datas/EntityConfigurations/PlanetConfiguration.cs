@@ -9,6 +9,7 @@ public class PlanetConfiguration : IEntityTypeConfiguration<PlanetModel>
     public void Configure(EntityTypeBuilder<PlanetModel> builder)
     {
         builder.ToTable("planets");
+
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id)
             .HasColumnName("id");
