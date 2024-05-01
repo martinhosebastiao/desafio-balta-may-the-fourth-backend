@@ -23,4 +23,5 @@ public class StarshipModel
     public string StarshipClass { get; set; }
     public List<CharacterModel>? Characters { get; set; }
     public List<MovieModel>? Movies { get; set; }
+
 }

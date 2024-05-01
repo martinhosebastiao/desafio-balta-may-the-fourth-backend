@@ -25,5 +25,6 @@ public class StarshipRelationshipConfiguration : IEntityTypeConfiguration<Starsh
             (StarshipTargetType)Enum.Parse(typeof(StarshipTargetType), j.ToString()))
                            .HasColumnName("StarshipTargetType")
                            .HasColumnType("tinyint");
+
     }
 }

@@ -49,6 +49,7 @@ namespace StarWars.API.Storages.Datas
             modelBuilder.ApplyConfiguration(new PlanetRelationshipConfiguration());
             modelBuilder.ApplyConfiguration(new StarshipRelationshipConfiguration());
 
+
             modelBuilder.UsePropertyAccessMode(PropertyAccessMode.Property);
 
             base.OnModelCreating(modelBuilder);

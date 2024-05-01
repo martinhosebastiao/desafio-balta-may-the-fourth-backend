@@ -76,6 +76,7 @@ namespace StarWars.API.Storages.Repositores
         Task<StarshipRelationshipModel?> CreateStarshipRelationshipAsync(
             StarshipRelationshipModel model,
             CancellationToken cancellationToken = default);
+
     }
 }
 

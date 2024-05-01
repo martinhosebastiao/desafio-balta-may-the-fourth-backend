@@ -8,6 +8,7 @@ public enum StarshipTargetType : byte
     Film = 2
 }
 
+
 public class StarshipRelationshipModel
 {
     public StarshipRelationshipModel(int starshipId)
