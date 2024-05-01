@@ -42,14 +42,14 @@ namespace StarWars.API.Storages.Repositores
                                                  select planet
                                                  ).ToList(),
                                       vehicles = (from rel in _context.MovieRelationships
-                                                 join vehicle in _context.Vehicles on rel.TargetId equals vehicle.Id
-                                                 where rel.MovieId == movie.Id && rel.Type == TargetType.Vehicle
-                                                 select vehicle
+                                                  join vehicle in _context.Vehicles on rel.TargetId equals vehicle.Id
+                                                  where rel.MovieId == movie.Id && rel.Type == TargetType.Vehicle
+                                                  select vehicle
                                                  ).ToList(),
                                       starship = (from rel in _context.MovieRelationships
-                                                 join starship in _context.Starships on rel.TargetId equals starship.Id
-                                                 where rel.MovieId == movie.Id && rel.Type == TargetType.Starship
-                                                 select starship
+                                                  join starship in _context.Starships on rel.TargetId equals starship.Id
+                                                  where rel.MovieId == movie.Id && rel.Type == TargetType.Starship
+                                                  select starship
                                                  ).ToList()
                                   })
                                   .AsNoTracking()
@@ -81,7 +81,7 @@ namespace StarWars.API.Storages.Repositores
                     {
                         item.movie?.Starships?.AddRange(item.starship);
                     }
-    
+
                     _movies.Add(item.movie!);
 
                     movieContol = item.movie.Id;
@@ -164,6 +164,8 @@ namespace StarWars.API.Storages.Repositores
 
             return result == 0 ? null : model;
         }
+
+
         public async Task<List<PlanetModel>?> GetPlanetsAsync(CancellationToken cancellationToken = default)
         {
             var response = await (from planet in _context.Planets.AsNoTracking()
@@ -171,14 +173,14 @@ namespace StarWars.API.Storages.Repositores
                                   {
                                       planet,
                                       residents = (from rel in _context.PlanetRelationships
-                                                 join person in _context.Characters on rel.TargetId equals person.Id
-                                                 where rel.PlanetId == planet.Id && rel.Type == PlanetTargetType.Resident
-                                                 select person
+                                                   join person in _context.Characters on rel.TargetId equals person.Id
+                                                   where rel.PlanetId == planet.Id && rel.Type == PlanetTargetType.Resident
+                                                   select person
                                                  ).ToList(),
                                       films = (from rel in _context.PlanetRelationships
-                                                join movie in _context.Movies on rel.TargetId equals movie.Id
-                                                 where rel.PlanetId == planet.Id && rel.Type == PlanetTargetType.Film
-                                                 select movie
+                                               join movie in _context.Movies on rel.TargetId equals movie.Id
+                                               where rel.PlanetId == planet.Id && rel.Type == PlanetTargetType.Film
+                                               select movie
                                                  ).ToList()
                                   })
                                   .AsNoTracking()
@@ -213,9 +215,38 @@ namespace StarWars.API.Storages.Repositores
         public async Task<List<VehicleModel>?> GetVehicleAsync(
             CancellationToken cancellationToken = default)
         {
-            var response = await _context.Vehicles.ToListAsync(cancellationToken);
+            var response = await (from vehicle in _context.Vehicles.AsNoTracking()
+                                  select new
+                                  {
+                                      vehicle,
+                                      films = (from rel in _context.VehicleRelationships
+                                               join movie in _context.Movies on rel.TargetId equals movie.Id
+                                               where rel.VehicleId == vehicle.Id && rel.Type == VehicleTargetType.Film
+                                               select movie
+                                                 ).ToList()
+                                  })
+                                  .AsNoTracking()
+                                  .ToListAsync(cancellationToken: cancellationToken);
 
-            return response;
+            var _vehicles = new List<VehicleModel>();
+            int vehicleContol = 0;
+
+            foreach (var item in response)
+            {
+                if (vehicleContol != item?.vehicle?.Id && item?.vehicle != null)
+                {
+                    if (item.films.Count > 0)
+                    {
+                        item.vehicle?.Movies?.AddRange(item.films);
+                    }
+
+                    _vehicles.Add(item.vehicle!);
+
+                    vehicleContol = item.vehicle.Id;
+                }
+            }
+
+            return _vehicles;
         }
 
 
@@ -274,6 +305,17 @@ namespace StarWars.API.Storages.Repositores
             CancellationToken cancellationToken = default)
         {
             _context.PlanetRelationships.Add(model);
+
+            var result = await _context.SaveChangesAsync(cancellationToken);
+
+            return result == 0 ? null : model;
+        }
+
+        public async Task<VehicleRelationshipModel?> CreateVehicleRelationshipAsync(
+            VehicleRelationshipModel model,
+            CancellationToken cancellationToken = default)
+        {
+            _context.VehicleRelationships.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
 
