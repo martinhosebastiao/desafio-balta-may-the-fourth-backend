@@ -1,5 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
+using StarWars.API.Common.Enums;
+using StarWars.API.Common.Utilities;
 
 namespace StarWars.API.Models
 {
@@ -18,27 +20,9 @@ namespace StarWars.API.Models
         public void AddMovie(string movie)
         {
             Type = TargetType.Movie;
-            TargetId = ExtractIdFromUrl(movie);
+            TargetId = Extract.IdFromUrl(movie);
         }
 
-        static int ExtractIdFromUrl(string? input)
-        {
-            if (input is null)
-            {
-                return 0;
-            }
-
-            input = input?.Replace("https://swapi.py4e.com/api/starships/", "");
-
-            // Cria um padrão regex para encontrar apenas dígitos numéricos
-            Regex regex = new Regex(@"\d+");
-
-            var result = regex.Matches(input!).FirstOrDefault();
-
-            // Extrai os números da string de entrada
-            var IdExtraido = int.Parse(result?.Value ?? "0");
-
-            return IdExtraido;
-        }
+        
     }
 }

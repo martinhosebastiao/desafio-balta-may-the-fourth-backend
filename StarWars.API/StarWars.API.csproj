@@ -50,6 +50,7 @@
     <None Remove="Services\Abstracts\" />
     <None Remove="Endpoints\Abstracts\" />
     <None Remove="Models\Imports\" />
+    <None Remove="Common\Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Middlewares\" />
@@ -63,5 +64,6 @@
     <Folder Include="Storages\Abstracts\" />
     <Folder Include="Services\Abstracts\" />
     <Folder Include="Endpoints\Abstracts\" />
+    <Folder Include="Common\Utilities\" />
   </ItemGroup>
 </Project>

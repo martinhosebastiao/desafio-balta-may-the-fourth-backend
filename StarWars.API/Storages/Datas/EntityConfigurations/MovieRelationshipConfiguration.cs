@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using StarWars.API.Common.Enums;
 using StarWars.API.Models;
 
 namespace StarWars.API.Storages.Datas.EntityConfigurations

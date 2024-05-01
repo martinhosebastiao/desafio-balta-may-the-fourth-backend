@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using StarWars.API.Common.Enums;
 using StarWars.API.Models;
 using StarWars.API.Storages.Datas;
 
@@ -171,14 +172,14 @@ namespace StarWars.API.Storages.Repositores
                                   {
                                       planet,
                                       residents = (from rel in _context.PlanetRelationships
-                                                 join person in _context.Characters on rel.TargetId equals person.Id
-                                                 where rel.PlanetId == planet.Id && rel.Type == PlanetTargetType.Resident
-                                                 select person
+                                                   join person in _context.Characters on rel.TargetId equals person.Id
+                                                   where rel.PlanetId == planet.Id && rel.Type == PlanetTargetType.Resident
+                                                   select person
                                                  ).ToList(),
                                       films = (from rel in _context.PlanetRelationships
-                                                join movie in _context.Movies on rel.TargetId equals movie.Id
-                                                 where rel.PlanetId == planet.Id && rel.Type == PlanetTargetType.Film
-                                                 select movie
+                                               join movie in _context.Movies on rel.TargetId equals movie.Id
+                                               where rel.PlanetId == planet.Id && rel.Type == PlanetTargetType.Film
+                                               select movie
                                                  ).ToList()
                                   })
                                   .AsNoTracking()
@@ -276,6 +277,11 @@ namespace StarWars.API.Storages.Repositores
         {
             _context.PlanetRelationships.Add(model);
 
+            var result = await _context.SaveChangesAsync(cancellationToken);
+
+            return result == 0 ? null : model;
+
+        }
 
         public async Task<VehicleRelationshipModel?> CreateVehicleRelationalShipAsync(VehicleRelationshipModel model, CancellationToken cancellationToken = default)
         {

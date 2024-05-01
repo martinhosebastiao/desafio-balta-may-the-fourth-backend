@@ -68,6 +68,10 @@ namespace StarWars.API.Storages.Repositores
             int Id,
             CancellationToken cancellationToken = default);
 
+        Task<MovieRelationshipModel?> CreateRelationalShipAsync(
+            MovieRelationshipModel model,
+            CancellationToken cancellationToken = default);
+
         Task<PlanetRelationshipModel?> CreatePlanetRelationshipAsync(
             PlanetRelationshipModel model,
             CancellationToken cancellationToken = default);

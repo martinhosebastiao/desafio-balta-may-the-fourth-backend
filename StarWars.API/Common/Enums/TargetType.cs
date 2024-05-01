@@ -1,4 +1,6 @@
-public enum TargetType : byte
+namespace StarWars.API.Common.Enums
+{
+    public enum TargetType : byte
     {
         Character = 1,
         Planet = 2,
@@ -6,3 +8,4 @@ public enum TargetType : byte
         Vehicle = 4,
         Movie = 5
     }
+}
