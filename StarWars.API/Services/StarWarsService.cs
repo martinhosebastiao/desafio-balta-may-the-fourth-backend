@@ -185,6 +185,12 @@ namespace StarWars.API.Services
         public async Task<dynamic?> GetVehicleAsync(CancellationToken cancellationToken)
         {
             var vehicle = await _starWarsRepository.GetVehicleAsync(cancellationToken);
+
+            if (vehicle == null)
+            {
+                return null;
+            }
+
             var _vehicle = vehicle.Select(x => new
             {
                 x.Name,
@@ -203,7 +209,7 @@ namespace StarWars.API.Services
                     k.Id,
                     k.Title
                 }).ToList()
-                }).ToList();
+            }).ToList();
 
             return vehicle;
         }

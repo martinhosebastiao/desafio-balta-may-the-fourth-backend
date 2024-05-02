@@ -272,7 +272,7 @@ namespace StarWars.API.Storages.Repositores
                                       vehicle,
                                       films = (from rel in _context.VehicleRelationships
                                                join movie in _context.Movies on rel.TargetId equals movie.Id
-                                               where rel.VehicleId == vehicle.Id && rel.Type ==TargetType.Movie
+                                               where rel.VehicleId == vehicle.Id && rel.Type == TargetType.Movie
                                                select movie
                                                  ).ToList()
                                   })
@@ -327,9 +327,9 @@ namespace StarWars.API.Storages.Repositores
                                   {
                                       starship,
                                       pilots = (from rel in _context.StarshipRelationships
-                                                   join person in _context.Characters on rel.TargetId equals person.Id
-                                                   where rel.StarshipId == starship.Id && rel.Type == StarshipTargetType.Pilot
-                                                   select person
+                                                join person in _context.Characters on rel.TargetId equals person.Id
+                                                where rel.StarshipId == starship.Id && rel.Type == StarshipTargetType.Pilot
+                                                select person
                                                  ).ToList(),
                                       films = (from rel in _context.StarshipRelationships
                                                join movie in _context.Movies on rel.TargetId equals movie.Id

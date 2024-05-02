@@ -23,7 +23,7 @@ namespace StarWars.API.Storages.Datas.EntityConfigurations
 
       builder.Property(p => p.Type).HasConversion(k => ((byte)k), j =>
           (TargetType)Enum.Parse(typeof(TargetType), j.ToString()))
-                    .HasColumnName("TargetType")
+                    .HasColumnName("VehicleTargetType")
                     .HasColumnType("tinyint");
     }
   }
