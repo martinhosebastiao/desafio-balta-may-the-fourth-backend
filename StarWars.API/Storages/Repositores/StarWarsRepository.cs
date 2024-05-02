@@ -271,6 +271,52 @@ namespace StarWars.API.Storages.Repositores
             return result == 0 ? null : model;
         }
 
+        public async Task<List<StarshipModel>?> GetStarshipsAsync(CancellationToken cancellationToken = default)
+        {
+            var response = await (from starship in _context.Starships.AsNoTracking()
+                                  select new
+                                  {
+                                      starship,
+                                      pilots = (from rel in _context.StarshipRelationships
+                                                   join person in _context.Characters on rel.TargetId equals person.Id
+                                                   where rel.StarshipId == starship.Id && rel.Type == StarshipTargetType.Pilot
+                                                   select person
+                                                 ).ToList(),
+                                      films = (from rel in _context.StarshipRelationships
+                                               join movie in _context.Movies on rel.TargetId equals movie.Id
+                                               where rel.StarshipId == starship.Id && rel.Type == StarshipTargetType.Film
+                                               select movie
+                                                 ).ToList()
+                                  })
+                                  .AsNoTracking()
+                                  .ToListAsync(cancellationToken: cancellationToken);
+
+            var _starships = new List<StarshipModel>();
+            int starshipContol = 0;
+
+            foreach (var item in response)
+            {
+                if (starshipContol != item?.starship?.Id && item?.starship != null)
+                {
+                    if (item.pilots.Count > 0)
+                    {
+                        item.starship?.Characters?.AddRange(item.pilots);
+                    }
+
+                    if (item.films.Count > 0)
+                    {
+                        item.starship?.Movies?.AddRange(item.films);
+                    }
+
+                    _starships.Add(item.starship!);
+
+                    starshipContol = item.starship.Id;
+                }
+            }
+
+            return _starships;
+        }
+
         public async Task<VehicleModel?> GetVehicleByIdAsync(
             int Id,
             CancellationToken cancellationToken = default)

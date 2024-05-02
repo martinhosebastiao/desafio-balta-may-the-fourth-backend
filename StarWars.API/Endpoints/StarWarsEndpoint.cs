@@ -60,6 +60,23 @@ namespace StarWars.API.Endpoints
             .Produces(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound);
 
+            route.MapGet($"{routePrefix}/getstarships", async (
+
+              [FromServices] IStarWarsService starWarsService,
+               CancellationToken cancellationToken) =>
+            {
+                var starships = await starWarsService.GetStarshipsAsync(cancellationToken);
+
+                if (starships is null)
+
+                {
+                    return Results.NotFound();
+                }
+                return Results.Ok(starships);
+            }).WithName($"GetStarshipsAsync{routePrefix}")
+            .Produces(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound);
+
             route.MapGet($"{routePrefix}/getvehicles", async (
                     [FromServices] IStarWarsService starWarsService,
                     CancellationToken CancellationToken) =>

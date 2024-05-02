@@ -58,6 +58,9 @@ namespace StarWars.API.Storages.Repositores
             StarshipModel model,
             CancellationToken cancellationToken = default);
 
+        Task<List<StarshipModel>?> GetStarshipsAsync(
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Cria um novo Veiculo
         /// </summary>

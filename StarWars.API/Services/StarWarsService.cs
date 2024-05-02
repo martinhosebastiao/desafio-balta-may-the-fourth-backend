@@ -1,5 +1,6 @@
 ﻿using StarWars.API.Models;
 using StarWars.API.Storages.Repositores;
+using System.Numerics;
 
 namespace StarWars.API.Services
 {
@@ -105,6 +106,45 @@ namespace StarWars.API.Services
                 x.SurfaceWater,
                 x.Population,
                 residents = x.Characters?.Select(k => new
+                {
+                    k.Id,
+                    k.Name
+                }).ToList(),
+                movies = x.Movies?.Select(k => new
+                {
+                    k.Id,
+                    k.Title
+                }).ToList(),
+
+            }).ToList();
+
+            return _planets;
+        }
+
+        public async Task<dynamic?> GetStarshipsAsync(CancellationToken cancellationToken = default)
+        {
+            var starships = await _starWarsRepository.GetStarshipsAsync(cancellationToken);
+
+            if (starships == null)
+            {
+                return null;
+            }
+
+            var _planets = starships.Select(x => new
+            {
+                x.Name,
+                x.Model,
+                x.Manufacturer,
+                x.CostInCredits,
+                x.Length,
+                x.MaxAtmospheringSpeed,
+                x.Crew,
+                x.Passengers,
+                x.CargoCapacity,
+                x.HyperdriveRating,
+                x.MGLT,
+                x.StarshipClass,
+                pilots = x.Characters?.Select(k => new
                 {
                     k.Id,
                     k.Name
