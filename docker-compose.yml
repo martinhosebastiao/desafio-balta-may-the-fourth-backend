@@ -12,5 +12,4 @@ services:
       - "443"
     build:
       context: .
-      network: starWars_default
       dockerfile: StarWars.API/Dockerfile
