@@ -114,9 +114,49 @@ namespace StarWars.API.Storages.Repositores
         public async Task<List<CharacterModel>?> GetCharactersAsync(
             CancellationToken cancellationToken = default)
         {
-            var response = await _context.Characters.ToListAsync(cancellationToken);
+            var response = await (from character in _context.Characters.AsNoTracking()
+                                  select new
+                                  {
+                                      character,
+                                      homeworld = (from rel in _context.CharacterRelationships
+                                                   join planet in _context.Planets on rel.TargetId equals planet.Id
+                                                   where rel.CharacterId == character.Id && rel.Type == CharacterTargetType.Homeworld
+                                                   select planet
+                                                 ).ToList(),
+                                      films = (from rel in _context.CharacterRelationships
+                                               join movie in _context.Movies on rel.TargetId equals movie.Id
+                                               where rel.CharacterId == character.Id && rel.Type == CharacterTargetType.Film
+                                               select movie
+                                                 ).ToList()
+                                  })
+                                  .AsNoTracking()
+                                  .ToListAsync(cancellationToken: cancellationToken);
 
-            return response;
+            var _characters = new List<CharacterModel>();
+            int characterContol = 0;
+
+            foreach (var item in response)
+            {
+                if (characterContol != item?.character?.Id && item?.character != null)
+                {
+                    if (item.films.Count > 0)
+                    {
+                        item.character?.Movies?.AddRange(item.films);
+                    }
+
+                    if (item.homeworld != null && item.homeworld.Any())
+                    {
+                        // Escolha um planeta da lista para atribuir ao personagem
+                        item.character.Planet = item.homeworld.First(); // Por exemplo, escolhendo o primeiro planeta
+                    }
+
+                    _characters.Add(item.character!);
+
+                    characterContol = item.character.Id;
+                }
+            }
+
+            return _characters;
         }
 
         public async Task<CharacterModel?> GetCharacterByIdAsync(
@@ -124,6 +164,15 @@ namespace StarWars.API.Storages.Repositores
             CancellationToken cancellationToken = default)
         {
             var response = await _context.Characters.Where(x => x.Id == characterId)
+                 .FirstOrDefaultAsync(cancellationToken);
+
+            return response;
+        }
+
+        public async Task<CharacterModel?> GetCharacterByNameAsync(string name,
+            CancellationToken cancellationToken = default)
+        {
+            var response = await _context.Characters.Where(x => x.Name == name)
                  .FirstOrDefaultAsync(cancellationToken);
 
             return response;
@@ -384,6 +433,17 @@ namespace StarWars.API.Storages.Repositores
             CancellationToken cancellationToken = default)
         {
             _context.StarshipRelationships.Add(model);
+
+            var result = await _context.SaveChangesAsync(cancellationToken);
+
+            return result == 0 ? null : model;
+        }
+
+        public async Task<CharacterRelationshipModel?> CreateCharacterRelationshipAsync(
+            CharacterRelationshipModel model,
+            CancellationToken cancellationToken = default)
+        {
+            _context.CharacterRelationships.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
 

@@ -2,7 +2,10 @@
 
 public sealed class CharacterModel
 {
-    public CharacterModel() {}
+    public CharacterModel() {
+        Planet = new PlanetModel();
+        Movies = new List<MovieModel>();
+    }
 
     public int Id { get; set; }
     public string Name { get; set; }

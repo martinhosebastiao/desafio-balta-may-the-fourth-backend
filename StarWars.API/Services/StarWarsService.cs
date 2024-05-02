@@ -67,15 +67,37 @@ namespace StarWars.API.Services
         {
             var character = await _starWarsRepository.GetCharacterByIdAsync(characterId, cancellationToken);
 
-
             return character;
         }
 
-        public async Task<List<CharacterModel>?> GetCharactersAsync(CancellationToken cancellationToken)
+        public async Task<dynamic> GetCharactersAsync(CancellationToken cancellationToken)
         {
             var characters = await _starWarsRepository.GetCharactersAsync(cancellationToken);
 
-            return characters;
+            if (characters == null)
+            {
+                return null;
+            }
+
+            var _characters = characters.Select(x => new
+            {
+                x.Name,
+                x.Height,
+                x.Mass,
+                x.HairColor,
+                x.SkinColor,
+                x.EyeColor,
+                x.BirthYear,
+                x.Gender,
+                homeworld = x.Planet.Name,
+                movies = x.Movies?.Select(k => new
+                {
+                    k.Id,
+                    k.Title
+                }).ToList(),
+            }).ToList();
+
+            return _characters;
         }
 
         public async Task<PlanetModel?> GetPlanetByIdAsync(int planetId, CancellationToken cancellationToken)
