@@ -1,6 +1,7 @@
 ﻿using StarWars.API.Models;
 using StarWars.API.Models.Imports;
 using StarWars.API.Storages.Repositores;
+using System.Numerics;
 
 namespace StarWars.API.Services
 {
@@ -22,11 +23,9 @@ namespace StarWars.API.Services
         public async Task<bool> FromSwapiAsync(
             CancellationToken cancellationToken = default)
         {
-            var modelA = await ImportStarshipsAsync(cancellationToken);
+            var model = await ImportCharactersAsync(cancellationToken);
 
-            var modelB = await ImportVehiclesAsync(cancellationToken);
-
-            var response = modelA == modelB;
+            var response = model;
 
             return response;
         }
@@ -122,7 +121,7 @@ namespace StarWars.API.Services
         private async Task<bool> ImportCharactersAsync(
             CancellationToken cancellationToken)
         {
-            string charactersUrl = "https://swapi.py4e.com/api/people/?page=9";
+            string charactersUrl = "https://swapi.py4e.com/api/people/?page=2";
 
             var response = await _httpClient.GetFromJsonAsync<CharacterImport>(
                 charactersUrl, cancellationToken: cancellationToken);
@@ -138,19 +137,41 @@ namespace StarWars.API.Services
                     var model = character.ConvertToModel();
 
                     var existCharacter = await _starWarsRepository
-                        .GetCharacterByIdAsync(
-                        model.Id,
+                        .GetCharacterByNameAsync(
+                        model.Name,
                         cancellationToken);
 
                     if (existCharacter is null)
                     {
                         var _character = await _starWarsRepository.CreateCharacterAsync(
-                                              model, cancellationToken);
+                                              model,
+                                              cancellationToken);
 
                         if (_character is null)
                         {
                             i++;
                             _errors.Add(i);
+                        }
+                        else
+                        {
+                            // Obter a lista de personagens do filme atual e
+                            // adicionar na tabela de relacionamento
+                            var _model = new CharacterRelationshipModel(_character.Id);
+                            _model.AddPlanet(character.Homeworld);
+
+                            await _starWarsRepository
+                                .CreateCharacterRelationshipAsync(
+                                    _model, cancellationToken);
+
+                            foreach (var item in character.Films)
+                            {
+                                var __model = new CharacterRelationshipModel(_character.Id);
+                                __model.AddMovies(item);
+
+                                await _starWarsRepository
+                                    .CreateCharacterRelationshipAsync(
+                                        __model, cancellationToken);
+                            }
                         }
                     }
                 }

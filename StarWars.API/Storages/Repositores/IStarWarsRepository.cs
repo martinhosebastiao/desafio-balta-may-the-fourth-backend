@@ -25,6 +25,9 @@ namespace StarWars.API.Storages.Repositores
             int characterId,
             CancellationToken cancellationToken = default);
 
+        Task<CharacterModel?> GetCharacterByNameAsync(string name,
+            CancellationToken cancellationToken = default);
+
         Task<CharacterModel?> CreateCharacterAsync(
             CharacterModel model, CancellationToken cancellationToken = default);
 
@@ -89,6 +92,10 @@ namespace StarWars.API.Storages.Repositores
         Task<VehicleRelationshipModel?> CreateVehicleRelationalShipAsync(
         VehicleRelationshipModel model,
         CancellationToken cancellationToken = default);
+
+        Task<CharacterRelationshipModel?> CreateCharacterRelationshipAsync(
+            CharacterRelationshipModel model,
+            CancellationToken cancellationToken = default);
     }
 }
 

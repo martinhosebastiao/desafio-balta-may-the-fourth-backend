@@ -20,6 +20,7 @@ namespace StarWars.API.Storages.Datas
         public DbSet<StarshipModel> Starships { get; private set; }
         public DbSet<VehicleModel> Vehicles { get; private set; }
         public DbSet<MovieRelationshipModel> MovieRelationships { get; private set; }
+        public DbSet<CharacterRelationshipModel> CharacterRelationships { get; private set; }
         public DbSet<PlanetRelationshipModel> PlanetRelationships { get; private set; }
         public DbSet<StarshipRelationshipModel> StarshipRelationships { get; private set; }
         public DbSet<VehicleRelationshipModel> VehicleRelationships { get; private set; }
@@ -47,6 +48,7 @@ namespace StarWars.API.Storages.Datas
             modelBuilder.ApplyConfiguration(new StarshipConfiguration());
             modelBuilder.ApplyConfiguration(new VehicleConfiguration());
             modelBuilder.ApplyConfiguration(new MovieRelationshipConfiguration());
+            modelBuilder.ApplyConfiguration(new CharacterRelationshipConfiguration());
             modelBuilder.ApplyConfiguration(new PlanetRelationshipConfiguration());
             modelBuilder.ApplyConfiguration(new StarshipRelationshipConfiguration());
             modelBuilder.ApplyConfiguration(new VehicleRelationshipConfiguration());

@@ -36,7 +36,8 @@ public class CharacterConfiguration : IEntityTypeConfiguration<CharacterModel>
         builder.Property(x => x.BirthYear)
                .HasColumnName("birth_year");
 
-        builder.Property(x => x.Gender);
+        builder.Property(x => x.Gender)
+            .HasColumnName("gender");
 
         builder.Ignore(x => x.Planet);
         builder.Ignore(x => x.Movies);
