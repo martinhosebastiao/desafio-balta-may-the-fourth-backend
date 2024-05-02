@@ -2,13 +2,16 @@ namespace StarWars.API.Models.Imports;
 
 public class VehicleImport
 {
-    public string Message { get; set; }
+    public int count { get; set; }
+    public object next { get; set; }
+    public object previous { get; set; }
     public List<VehicleResult> Results { get; set; }
 
 }
 
 public class VehicleResult
 {
+    public VehicleResult() { }
     public int Id { get; set; }
     public string Name { get; set; }
     public string Model { get; set; }
@@ -21,8 +24,7 @@ public class VehicleResult
     public string cargo_capacity { get; set; }
     public string Consumables { get; set; }
     public string vehicle_class { get; set; }
-    public List<string> Movies { get; set; }
-
+    public List<string> Films { get; set; }
 
     public VehicleModel ConvertToModel()
     {

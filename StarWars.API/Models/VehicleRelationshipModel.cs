@@ -22,7 +22,5 @@ namespace StarWars.API.Models
             Type = TargetType.Movie;
             TargetId = Extract.IdFromUrl(movie);
         }
-
-        
     }
 }

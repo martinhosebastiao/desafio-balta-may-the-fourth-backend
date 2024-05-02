@@ -88,7 +88,7 @@ namespace StarWars.API.Services
         {
             var planets = await _starWarsRepository.GetPlanetsAsync(cancellationToken);
 
-            if(planets == null)
+            if (planets == null)
             {
                 return null;
             }
