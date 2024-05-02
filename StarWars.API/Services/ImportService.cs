@@ -26,7 +26,7 @@ namespace StarWars.API.Services
 
             var modelB = await ImportVehiclesAsync(cancellationToken);
 
-            var modelA == modelB;
+            var response = modelA == modelB;
 
             return response;
         }
@@ -263,7 +263,7 @@ namespace StarWars.API.Services
                         }
                         else
                         {
-                            foreach (var item in vehicles.Movies)
+                            foreach (var item in vehicles.Films)
                             {
                                 var _model = new VehicleRelationshipModel(_vehicles.Id);
                                 _model.AddMovie(item);

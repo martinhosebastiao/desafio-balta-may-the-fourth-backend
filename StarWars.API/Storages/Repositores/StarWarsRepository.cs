@@ -223,7 +223,7 @@ namespace StarWars.API.Storages.Repositores
                                       vehicle,
                                       films = (from rel in _context.VehicleRelationships
                                                join movie in _context.Movies on rel.TargetId equals movie.Id
-                                               where rel.VehicleId == vehicle.Id && rel.Type == VehicleTargetType.Film
+                                               where rel.VehicleId == vehicle.Id && rel.Type ==TargetType.Movie
                                                select movie
                                                  ).ToList()
                                   })
