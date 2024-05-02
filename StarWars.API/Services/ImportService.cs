@@ -260,18 +260,18 @@ namespace StarWars.API.Services
                         }
                         else
                         {
-                            foreach (var item in vehicles.Films)
+                            foreach (var item in vehicles.Movies)
                             {
                                 var _model = new VehicleRelationshipModel(_vehicles.Id);
-                                _model.AddMovies(item);
+                                _model.AddMovie(item);
 
                                 await _starWarsRepository
-                                    .CreateVehicleRelationshipAsync(
+                                    .CreateVehicleRelationalShipAsync(
                                         _model, cancellationToken);
                             }
                         }
-
                     }
+
                 }
             }
 

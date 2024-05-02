@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using StarWars.API.Common.Enums;
 using StarWars.API.Models;
 using StarWars.API.Storages.Datas;
 
@@ -300,11 +301,22 @@ namespace StarWars.API.Storages.Repositores
             return result == 0 ? null : model;
         }
 
+
         public async Task<PlanetRelationshipModel?> CreatePlanetRelationshipAsync(
             PlanetRelationshipModel model,
             CancellationToken cancellationToken = default)
         {
             _context.PlanetRelationships.Add(model);
+
+            var result = await _context.SaveChangesAsync(cancellationToken);
+
+            return result == 0 ? null : model;
+
+        }
+
+        public async Task<VehicleRelationshipModel?> CreateVehicleRelationalShipAsync(VehicleRelationshipModel model, CancellationToken cancellationToken = default)
+        {
+            _context.VehicleRelationships.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
 

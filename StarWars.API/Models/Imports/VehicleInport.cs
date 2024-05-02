@@ -12,6 +12,7 @@ public class VehicleImport
 public class VehicleResult
 {
     public VehicleResult() { }
+    public int Id { get; set; }
     public string Name { get; set; }
     public string Model { get; set; }
     public string Manufacturer { get; set; }
@@ -25,11 +26,11 @@ public class VehicleResult
     public string vehicle_class { get; set; }
     public List<string> Films { get; set; }
 
-
     public VehicleModel ConvertToModel()
     {
         return new VehicleModel
         {
+            Id = Id,
             Name = Name,
             Model = Model,
             Manufacturer = Manufacturer,

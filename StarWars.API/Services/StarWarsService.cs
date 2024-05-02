@@ -120,16 +120,10 @@ namespace StarWars.API.Services
             return _planets;
         }
 
-        public async Task<dynamic> GetVehicleAsync(CancellationToken cancellationToken)
+        public async Task<dynamic?> GetVehicleAsync(CancellationToken cancellationToken)
         {
             var vehicle = await _starWarsRepository.GetVehicleAsync(cancellationToken);
-
-            if (vehicle == null)
-            {
-                return null;
-            }
-
-            var _vehicles = vehicle.Select(x => new
+            var _vehicle = vehicle.Select(x => new
             {
                 x.Name,
                 x.Model,
@@ -146,10 +140,10 @@ namespace StarWars.API.Services
                 {
                     k.Id,
                     k.Title
-                }).ToList(),
-            }).ToList();
+                }).ToList()
+                }).ToList();
 
-            return _vehicles;
+            return vehicle;
         }
     }
 }
