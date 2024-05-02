@@ -61,5 +61,7 @@ public class StarshipConfiguration : IEntityTypeConfiguration<StarshipModel>
 
 
         builder.Ignore(x => x.Movies);
+        builder.Ignore(x => x.Characters);
+
     }
 }

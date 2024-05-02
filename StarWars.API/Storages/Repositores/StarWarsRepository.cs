@@ -14,6 +14,7 @@ namespace StarWars.API.Storages.Repositores
             _context = context;
         }
 
+
         public async Task<MovieModel?> CreateMovieAsync(
             MovieModel model,
             CancellationToken cancellationToken = default)
@@ -280,6 +281,15 @@ namespace StarWars.API.Storages.Repositores
             return response;
         }
 
+        public async Task<StarshipModel?> GetStarshipByNameAsync(string name,
+            CancellationToken cancellationToken = default)
+        {
+            var response = await _context.Starships.Where(x => x.Name == name)
+                 .FirstOrDefaultAsync(cancellationToken);
+
+            return response;
+        }
+
         public async Task<VehicleModel?> CreateVehicleAsync(VehicleModel model,
             CancellationToken cancellationToken = default)
         {
@@ -323,11 +333,11 @@ namespace StarWars.API.Storages.Repositores
             return result == 0 ? null : model;
         }
 
-        public async Task<VehicleRelationshipModel?> CreateVehicleRelationshipAsync(
-            VehicleRelationshipModel model,
+        public async Task<StarshipRelationshipModel?> CreateStarshipRelationshipAsync(
+            StarshipRelationshipModel model,
             CancellationToken cancellationToken = default)
         {
-            _context.VehicleRelationships.Add(model);
+            _context.StarshipRelationships.Add(model);
 
             var result = await _context.SaveChangesAsync(cancellationToken);
 
@@ -335,4 +345,3 @@ namespace StarWars.API.Storages.Repositores
         }
     }
 }
-

@@ -51,6 +51,9 @@ namespace StarWars.API.Storages.Repositores
            int starshipId,
            CancellationToken cancellationToken = default);
 
+        Task<StarshipModel?> GetStarshipByNameAsync(string name,
+            CancellationToken cancellationToken = default);
+
         Task<StarshipModel?> CreateStarshipAsync(
             StarshipModel model,
             CancellationToken cancellationToken = default);
@@ -75,11 +78,14 @@ namespace StarWars.API.Storages.Repositores
         Task<PlanetRelationshipModel?> CreatePlanetRelationshipAsync(
             PlanetRelationshipModel model,
             CancellationToken cancellationToken = default);
+
+        Task<StarshipRelationshipModel?> CreateStarshipRelationshipAsync(
+            StarshipRelationshipModel model,
+            CancellationToken cancellationToken = default);
       
         Task<VehicleRelationshipModel?> CreateVehicleRelationalShipAsync(
-            VehicleRelationshipModel model,
-            CancellationToken cancellationToken = default);
-
+        VehicleRelationshipModel model,
+        CancellationToken cancellationToken = default);
     }
 }
 

@@ -22,8 +22,11 @@ namespace StarWars.API.Services
         public async Task<bool> FromSwapiAsync(
             CancellationToken cancellationToken = default)
         {
-            var model = await ImportVehiclesAsync(cancellationToken);
-            var response = model;
+            var modelA = await ImportStarshipsAsync(cancellationToken);
+
+            var modelB = await ImportVehiclesAsync(cancellationToken);
+
+            var modelA == modelB;
 
             return response;
         }
@@ -161,7 +164,7 @@ namespace StarWars.API.Services
         private async Task<bool> ImportPlanetsAsync(
             CancellationToken cancellationToken)
         {
-            string planetsUrl = "https://swapi.py4e.com/api/planets/?page=2";
+            string planetsUrl = "https://swapi.py4e.com/api/planets/?page=3";
 
             var response = await _httpClient.GetFromJsonAsync<PlanetImport>(
                 planetsUrl, cancellationToken: cancellationToken);
@@ -299,19 +302,44 @@ namespace StarWars.API.Services
                     var model = starship.ConvertToModel();
 
                     var existStarship = await _starWarsRepository
-                        .GetStarshipByIdAsync(
-                        model.Id,
+                        .GetStarshipByNameAsync(
+                        model.Name,
                         cancellationToken);
 
                     if (existStarship is null)
                     {
                         var _starship = await _starWarsRepository.CreateStarshipAsync(
-                                              model, cancellationToken);
+                                              model,
+                                              cancellationToken);
 
                         if (_starship is null)
                         {
                             i++;
                             _errors.Add(i);
+                        }
+                        else
+                        {
+                            // Obter a lista de personagens do filme atual e
+                            // adicionar na tabela de relacionamento
+                            foreach (var item in starship.Pilots)
+                            {
+                                var _model = new StarshipRelationshipModel(_starship.Id);
+                                _model.AddCharacters(item);
+
+                                await _starWarsRepository
+                                    .CreateStarshipRelationshipAsync(
+                                        _model, cancellationToken);
+                            }
+
+                            foreach (var item in starship.Films)
+                            {
+                                var _model = new StarshipRelationshipModel(_starship.Id);
+                                _model.AddMovies(item);
+
+                                await _starWarsRepository
+                                    .CreateStarshipRelationshipAsync(
+                                        _model, cancellationToken);
+                            }
                         }
                     }
                 }
@@ -321,6 +349,7 @@ namespace StarWars.API.Services
 
             return _response;
         }
+
     }
 }
 
