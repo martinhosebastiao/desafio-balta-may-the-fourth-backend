@@ -22,7 +22,7 @@ namespace StarWars.API.Services
         public async Task<bool> FromSwapiAsync(
             CancellationToken cancellationToken = default)
         {
-            var model = await ImportPlanetsAsync(cancellationToken);
+            var model = await ImportVehiclesAsync(cancellationToken);
             var response = model;
 
             return response;
@@ -228,7 +228,7 @@ namespace StarWars.API.Services
         private async Task<bool> ImportVehiclesAsync(
             CancellationToken cancellationToken)
         {
-            string vehiclesUrl = "https://swapi.py4e.com/api/vehicles";
+            string vehiclesUrl = "https://swapi.py4e.com/api/vehicles/?page=1";
 
             var response = await _httpClient.GetFromJsonAsync<VehicleImport>(
                 vehiclesUrl, cancellationToken: cancellationToken);

@@ -22,15 +22,15 @@ namespace StarWars.API.Storages.Repositores
             CancellationToken cancellationToken = default);
 
         Task<CharacterModel?> GetCharacterByIdAsync(
-			int characterId, 
-			CancellationToken cancellationToken = default);
+            int characterId,
+            CancellationToken cancellationToken = default);
 
-		Task<CharacterModel?> CreateCharacterAsync(
-			CharacterModel model,  CancellationToken cancellationToken = default);
+        Task<CharacterModel?> CreateCharacterAsync(
+            CharacterModel model, CancellationToken cancellationToken = default);
 
-		Task<PlanetModel?> GetPlanetByIdAsync(
-		   int planetId,
-		   CancellationToken cancellationToken = default);
+        Task<PlanetModel?> GetPlanetByIdAsync(
+           int planetId,
+           CancellationToken cancellationToken = default);
 
         Task<PlanetModel?> GetPlanetByNameAsync(
             string name,
@@ -38,10 +38,10 @@ namespace StarWars.API.Storages.Repositores
 
 
         Task<PlanetModel?> CreatePlanetAsync(
-			PlanetModel model,
-			CancellationToken cancellationToken = default);
+            PlanetModel model,
+            CancellationToken cancellationToken = default);
 
-		Task<List<PlanetModel?>> GetPlanetsAsync(
+        Task<List<PlanetModel?>> GetPlanetsAsync(
             CancellationToken cancellationToken = default);
 
         Task<List<VehicleModel>?> GetVehicleAsync(
@@ -77,8 +77,8 @@ namespace StarWars.API.Storages.Repositores
             CancellationToken cancellationToken = default);
       
         Task<VehicleRelationshipModel?> CreateVehicleRelationalShipAsync(
-        VehicleRelationshipModel model,
-        CancellationToken cancellationToken = default);
+            VehicleRelationshipModel model,
+            CancellationToken cancellationToken = default);
 
     }
 }
